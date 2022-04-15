@@ -1,0 +1,18 @@
+program ProjetoFarmacia;
+
+uses
+  Vcl.Forms,
+  view.principal in 'View\view.principal.pas' {frmPrincipal},
+  view.padrao in 'View\Padrao\view.padrao.pas' {FormPadrao},
+  view.compras in 'View\view.compras.pas' {frmCompras};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TFormPadrao, FormPadrao);
+  Application.CreateForm(TfrmCompras, frmCompras);
+  Application.Run;
+end.

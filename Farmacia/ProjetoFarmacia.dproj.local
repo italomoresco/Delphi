@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/11/22 21:00:42.000.248,=C:\Users\italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 13:30:56.000.735,=C:\Users\italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 13:31:25.000.717,C:\Users\italo\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\italo\Documents\GitHub\Delphi\View\view.principal.pas</Transaction>
+    <Transaction>2022/04/15 13:31:25.000.717,C:\Users\italo\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\italo\Documents\GitHub\Delphi\View\view.principal.dfm</Transaction>
+    <Transaction>2022/04/15 13:31:45.000.112,C:\Users\italo\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\italo\Documents\GitHub\Delphi\ProjetoFarmacia.dproj</Transaction>
+    <Transaction>2022/04/15 13:50:33.775,=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 13:50:59.413,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\Padrao\view.padrao.dfm=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.dfm</Transaction>
+    <Transaction>2022/04/15 13:50:59.413,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\Padrao\view.padrao.pas=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 14:43:58.244,=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 14:44:18.107,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\view.compras.dfm=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.dfm</Transaction>
+    <Transaction>2022/04/15 14:44:18.107,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\view.compras.pas=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 14:45:18.223,=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 14:45:40.218,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\view.vendas.pas=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 14:45:40.218,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\view.vendas.dfm=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.dfm</Transaction>
+    <Transaction>2022/04/15 14:45:48.237,=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 14:46:18.027,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\view.pessoas.dfm=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.dfm</Transaction>
+    <Transaction>2022/04/15 14:46:18.027,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\view.pessoas.pas=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 15:06:55.611,=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+    <Transaction>2022/04/15 15:07:59.883,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\view.produtos.dfm=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.dfm</Transaction>
+    <Transaction>2022/04/15 15:07:59.883,C:\Users\italo\Documents\GitHub\Delphi\Farmacia\View\view.produtos.pas=C:\Users\italo\Documents\GitHub\Delphi\Farmacia\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

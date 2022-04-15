@@ -1,0 +1,14 @@
+program ProjetoFarmacia;
+
+uses
+  Vcl.Forms,
+  view.principal in 'View\view.principal.pas' {frmPrincipal};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.Run;
+end.
