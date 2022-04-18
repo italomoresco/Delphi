@@ -80,19 +80,17 @@ object frmPadrao: TfrmPadrao
           Align = alTop
           TabOrder = 0
           object btnSearch: TButton
-            Left = 424
-            Top = 8
-            Width = 97
-            Height = 25
+            Left = 1
+            Top = 1
+            Width = 526
+            Height = 39
+            Align = alClient
             Caption = 'Consultar'
             TabOrder = 0
-          end
-          object edtSearch: TEdit
-            Left = 8
-            Top = 8
-            Width = 410
-            Height = 21
-            TabOrder = 1
+            ExplicitLeft = 424
+            ExplicitTop = 8
+            ExplicitWidth = 97
+            ExplicitHeight = 25
           end
         end
         object dbgSearch: TDBGrid

@@ -21,18 +21,14 @@ inherited frmProdutos: TfrmProdutos
         OnClick = btnCancelClick
       end
       inherited btnDelete: TButton
-        OnClick = btnExcluirClick
+        OnClick = btnDeleteClick
       end
     end
     inherited pcMain: TPageControl
-      ActivePage = TabSheet2
       inherited TabSheet1: TTabSheet
         inherited pnlSearch: TPanel
           inherited btnSearch: TButton
             OnClick = btnSearchClick
-          end
-          inherited edtSearch: TEdit
-            Enabled = False
           end
         end
         inherited dbgSearch: TDBGrid

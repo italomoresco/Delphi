@@ -19,7 +19,9 @@ uses
   Model.Entidades.Pedidos in 'Model\Entidades\Model.Entidades.Pedidos.pas',
   Model.Entidades.PedidosItens in 'Model\Entidades\Model.Entidades.PedidosItens.pas',
   Model.Entidades.Produto in 'Model\Entidades\Model.Entidades.Produto.pas',
-  Model.Dao.Produto in 'Model\Dao\Model.Dao.Produto.pas';
+  Model.Dao.Produto in 'Model\Dao\Model.Dao.Produto.pas',
+  Model.Entidades.Pessoa in 'Model\Entidades\Model.Entidades.Pessoa.pas',
+  Model.Dao.Pessoa in 'Model\Dao\Model.Dao.Pessoa.pas';
 
 {$R *.res}
 

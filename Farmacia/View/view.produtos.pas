@@ -3,12 +3,10 @@ unit view.produtos;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, view.padrao, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls,
-  Vcl.ComCtrls, Vcl.ExtCtrls, Controller.Interfaces, Controller.Controle,
-  Vcl.Mask, Vcl.DBCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, view.padrao, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Controller.Interfaces,
+  Controller.Controle, Vcl.Mask, Vcl.DBCtrls;
 
 type
   TfrmProdutos = class(TfrmPadrao)
@@ -23,9 +21,8 @@ type
     procedure btnSaveClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnNewClick(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
-    procedure btnEditClick(Sender: TObject);
   private
     { Private declarations }
     FControle: iControle;
@@ -47,13 +44,7 @@ begin
    dsSearch.DataSet.Cancel;
 end;
 
-procedure TfrmProdutos.btnEditClick(Sender: TObject);
-begin
-  inherited;
-   dsSearch.DataSet.Edit;
-end;
-
-procedure TfrmProdutos.btnExcluirClick(Sender: TObject);
+procedure TfrmProdutos.btnDeleteClick(Sender: TObject);
 begin
   inherited;
    FControle
@@ -112,6 +103,7 @@ procedure TfrmProdutos.FormCreate(Sender: TObject);
 begin
   inherited;
    FControle := TControle.New;
+   ListarTodos;
 end;
 
 procedure TfrmProdutos.ListarTodos;

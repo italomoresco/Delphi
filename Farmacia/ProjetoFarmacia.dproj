@@ -134,6 +134,8 @@
         <DCCReference Include="Model\Entidades\Model.Entidades.PedidosItens.pas"/>
         <DCCReference Include="Model\Entidades\Model.Entidades.Produto.pas"/>
         <DCCReference Include="Model\Dao\Model.Dao.Produto.pas"/>
+        <DCCReference Include="Model\Entidades\Model.Entidades.Pessoa.pas"/>
+        <DCCReference Include="Model\Dao\Model.Dao.Pessoa.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

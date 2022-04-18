@@ -21,7 +21,6 @@ type
     pnlSearch: TPanel;
     dbgSearch: TDBGrid;
     btnSearch: TButton;
-    edtSearch: TEdit;
     dsSearch: TDataSource;
     procedure dsSearchDataChange(Sender: TObject; Field: TField);
     procedure pcMainChange(Sender: TObject);

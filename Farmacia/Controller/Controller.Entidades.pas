@@ -4,7 +4,8 @@ interface
 
 uses
   Controller.Interfaces, Model.Dao.Interfaces, Model.Entidades.Pedidos, Model.Entidades.PedidosItens,
-  Model.Entidades.Produto, Model.Dao.PedidosItens, Model.Dao.Pedidos, Model.Dao.Produto;
+  Model.Entidades.Produto, Model.Dao.PedidosItens, Model.Dao.Pedidos, Model.Dao.Produto,
+  Model.Entidades.Pessoa, Model.Dao.Pessoa;
 
 type
   TControleEntidades = class(TInterfacedObject, iControleEntidades)
@@ -12,6 +13,7 @@ type
       FPedidos: iDAOEntity<TPedidos>;
       FPedidosItens: iDAOEntity<TPedidosItens>;
       FProduto: iDAOEntity<TProduto>;
+      FPessoa: iDAOEntity<TPessoa>;
     public
       constructor Create;
       destructor Destroy; override;
@@ -19,6 +21,7 @@ type
       function Pedidos: iDAOEntity<TPedidos>;
       function PedidosItens: iDAOEntity<TPedidosItens>;
       function Produto: iDAOEntity<TProduto>;
+      function Pessoa: iDAOEntity<TPessoa>;
   end;
 
 implementation
@@ -50,6 +53,13 @@ begin
    if not Assigned(FPedidosItens) then
       FPedidosItens := TDAOPedidosItens.New;
    Result := FPedidosItens;
+end;
+
+function TControleEntidades.Pessoa: iDAOEntity<TPessoa>;
+begin
+   if not Assigned(FPessoa) then
+      FPessoa := TDAOPessoa.New;
+   Result := FPessoa;
 end;
 
 function TControleEntidades.Produto: iDAOEntity<TProduto>;
