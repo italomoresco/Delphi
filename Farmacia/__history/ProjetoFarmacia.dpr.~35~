@@ -1,0 +1,32 @@
+program ProjetoFarmacia;
+
+uses
+  Vcl.Forms,
+  view.principal in 'View\view.principal.pas' {frmPrincipal},
+  view.padrao in 'View\Padrao\view.padrao.pas' {frmPadrao},
+  view.compras in 'View\view.compras.pas' {frmCompras},
+  view.vendas in 'View\view.vendas.pas' {frmVendas},
+  view.pessoas in 'View\view.pessoas.pas' {frmPessoas},
+  view.produtos in 'View\view.produtos.pas' {frmProdutos},
+  Services.Generic in 'Services\Services.Generic.pas',
+  Resources.Interfaces in 'Resources\Resources.Interfaces.pas',
+  Resources.Conexao in 'Resources\Resources.Conexao.pas',
+  Model.Entity.Cliente in 'Model\Entity\Model.Entity.Cliente.pas',
+  Controller.DTO.Cliente in 'Controller\DTO\Controller.DTO.Cliente.pas',
+  Controller.DTO.Interfaces in 'Controller\DTO\Controller.DTO.Interfaces.pas',
+  Controller.Interfaces in 'Controller\Controller.Interfaces.pas',
+  Controller.Controle in 'Controller\Controller.Controle.pas',
+  CRUD.View.Principal in 'View\CRUD.View.Principal.pas' {frmListarClientes},
+  Controller.DTO.Endereco in 'Controller\DTO\Controller.DTO.Endereco.pas',
+  Model.Entity.Endereco in 'Model\Entity\Model.Entity.Endereco.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TfrmPadrao, frmPadrao);
+  Application.CreateForm(TfrmListarClientes, frmListarClientes);
+  Application.Run;
+end.

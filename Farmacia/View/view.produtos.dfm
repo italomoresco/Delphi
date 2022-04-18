@@ -1,29 +1,93 @@
 inherited frmProdutos: TfrmProdutos
   Caption = 'Produtos'
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object DBText1: TDBText [0]
+    Left = 248
+    Top = 184
+    Width = 65
+    Height = 17
+  end
   inherited pnlMain: TPanel
-    ExplicitLeft = 0
-    ExplicitTop = 0
-    ExplicitWidth = 538
-    ExplicitHeight = 345
     inherited pnlButtons: TPanel
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 536
+      inherited btnNew: TButton
+        OnClick = btnNewClick
+      end
+      inherited btnSave: TButton
+        OnClick = btnSaveClick
+      end
+      inherited btnCancel: TButton
+        OnClick = btnCancelClick
+      end
+      inherited btnDelete: TButton
+        OnClick = btnExcluirClick
+      end
     end
     inherited pcMain: TPageControl
-      ExplicitTop = 42
-      ExplicitWidth = 536
-      ExplicitHeight = 302
+      ActivePage = TabSheet2
       inherited TabSheet1: TTabSheet
         inherited pnlSearch: TPanel
-          ExplicitTop = 0
-          ExplicitWidth = 528
-          inherited edtSearch: TEdit
-            Height = 21
-            ExplicitHeight = 21
+          inherited btnSearch: TButton
+            OnClick = btnSearchClick
           end
+          inherited edtSearch: TEdit
+            Enabled = False
+          end
+        end
+        inherited dbgSearch: TDBGrid
+          DataSource = dsSearch
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        object lbID: TLabel
+          Left = 25
+          Top = 11
+          Width = 33
+          Height = 13
+          Caption = 'C'#243'digo'
+        end
+        object lblName: TLabel
+          Left = 12
+          Top = 38
+          Width = 46
+          Height = 13
+          Caption = 'Descri'#231#227'o'
+        end
+        object lblPrice: TLabel
+          Left = 31
+          Top = 65
+          Width = 27
+          Height = 13
+          Caption = 'Pre'#231'o'
+        end
+        object edtID: TDBEdit
+          Left = 64
+          Top = 8
+          Width = 121
+          Height = 21
+          DataField = 'ID'
+          DataSource = dsSearch
+          Enabled = False
+          TabOrder = 0
+        end
+        object edtName: TDBEdit
+          Left = 64
+          Top = 35
+          Width = 335
+          Height = 21
+          DataField = 'DESCRICAO'
+          DataSource = dsSearch
+          TabOrder = 1
+        end
+        object edtPrice: TDBEdit
+          Left = 64
+          Top = 62
+          Width = 121
+          Height = 21
+          DataField = 'VALOR'
+          DataSource = dsSearch
+          TabOrder = 2
         end
       end
     end

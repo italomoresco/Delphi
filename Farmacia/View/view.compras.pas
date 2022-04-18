@@ -8,7 +8,7 @@ uses
   Vcl.DBGrids, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
 
 type
-  TfrmCompras = class(TFormPadrao)
+  TfrmCompras = class(TfrmPadrao)
   private
     { Private declarations }
   public

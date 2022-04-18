@@ -1,0 +1,23 @@
+program ProjetoFarmacia;
+
+uses
+  Vcl.Forms,
+  view.principal in 'View\view.principal.pas' {frmPrincipal},
+  view.padrao in 'View\Padrao\view.padrao.pas' {frmPadrao},
+  view.compras in 'View\view.compras.pas' {frmCompras},
+  view.vendas in 'View\view.vendas.pas' {frmVendas},
+  view.pessoas in 'View\view.pessoas.pas' {frmPessoas},
+  view.produtos in 'View\view.produtos.pas' {frmProdutos},
+  Services.Generic in 'Services\Services.Generic.pas',
+  Resources.Interfaces in 'Resources\Resources.Interfaces.pas',
+  Resources.Conexao in 'Resources\Resources.Conexao.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TfrmPadrao, frmPadrao);
+  Application.Run;
+end.

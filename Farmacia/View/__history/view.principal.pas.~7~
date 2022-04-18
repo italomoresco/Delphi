@@ -1,0 +1,47 @@
+unit view.principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons;
+
+type
+  TfrmPrincipal = class(TForm)
+    pnlMain: TPanel;
+    pnlOptions: TPanel;
+    btnPurchases: TBitBtn;
+    btnSales: TBitBtn;
+    btnPeople: TBitBtn;
+    btnExit: TBitBtn;
+    procedure btnPurchasesClick(Sender: TObject);
+    procedure btnSalesClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses
+   view.compras, view.vendas, view.pessoas, view.produtos;
+
+procedure TfrmPrincipal.btnPurchasesClick(Sender: TObject);
+begin
+   frmCompras := TfrmCompras.Create(Self);
+   frmCompras.ShowModal;
+end;
+
+procedure TfrmPrincipal.btnSalesClick(Sender: TObject);
+begin
+   frmVendas := TfrmVendas.Create(Self);
+   frmVendas.ShowModal;
+end;
+
+end.

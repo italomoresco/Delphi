@@ -1,4 +1,4 @@
-object FormPadrao: TFormPadrao
+object frmPadrao: TfrmPadrao
   Left = 0
   Top = 0
   Caption = 'frmPadrao'
@@ -11,6 +11,7 @@ object FormPadrao: TFormPadrao
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -20,10 +21,6 @@ object FormPadrao: TFormPadrao
     Height = 345
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 176
-    ExplicitTop = 120
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object pnlButtons: TPanel
       Left = 1
       Top = 1
@@ -31,9 +28,6 @@ object FormPadrao: TFormPadrao
       Height = 41
       Align = alTop
       TabOrder = 0
-      ExplicitLeft = 168
-      ExplicitTop = 104
-      ExplicitWidth = 185
       object btnNew: TButton
         Left = 4
         Top = 8
@@ -50,7 +44,7 @@ object FormPadrao: TFormPadrao
         Caption = 'Salvar'
         TabOrder = 1
       end
-      object btnCancelar: TButton
+      object btnCancel: TButton
         Left = 166
         Top = 8
         Width = 75
@@ -58,7 +52,7 @@ object FormPadrao: TFormPadrao
         Caption = 'Cancelar'
         TabOrder = 2
       end
-      object btnExcluir: TButton
+      object btnDelete: TButton
         Left = 247
         Top = 8
         Width = 75
@@ -75,9 +69,7 @@ object FormPadrao: TFormPadrao
       ActivePage = TabSheet1
       Align = alClient
       TabOrder = 1
-      ExplicitTop = 48
-      ExplicitWidth = 525
-      ExplicitHeight = 193
+      OnChange = pcMainChange
       object TabSheet1: TTabSheet
         Caption = 'Consulta'
         object pnlSearch: TPanel
@@ -87,8 +79,6 @@ object FormPadrao: TFormPadrao
           Height = 41
           Align = alTop
           TabOrder = 0
-          ExplicitTop = -2
-          ExplicitWidth = 517
           object btnSearch: TButton
             Left = 424
             Top = 8
@@ -101,7 +91,7 @@ object FormPadrao: TFormPadrao
             Left = 8
             Top = 8
             Width = 410
-            Height = 25
+            Height = 21
             TabOrder = 1
           end
         end
@@ -117,6 +107,7 @@ object FormPadrao: TFormPadrao
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDblClick = dbgSearchDblClick
         end
       end
       object TabSheet2: TTabSheet
@@ -124,5 +115,10 @@ object FormPadrao: TFormPadrao
         ImageIndex = 1
       end
     end
+  end
+  object dsSearch: TDataSource
+    OnDataChange = dsSearchDataChange
+    Left = 488
+    Top = 8
   end
 end
