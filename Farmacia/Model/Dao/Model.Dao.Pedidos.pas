@@ -3,7 +3,8 @@ unit Model.Dao.Pedidos;
 interface
 
 uses
-  Model.Dao.Interfaces, Model.Entidades.Pedidos, Data.DB, Conexao.Interfaces, Conexao.Firedac;
+  Model.Dao.Interfaces, Model.Entidades.Pedidos, Data.DB, Conexao.Interfaces,
+  Conexao.Firedac, Vcl.Dialogs;
 
 type
   TDAOPedido = class(TInterfacedObject, iDAOEntity<TPedidos>)
@@ -35,12 +36,15 @@ begin
    Result := Self;
    try
       FConexao
-         .SQL('UPDATE PEDIDOS SET DESCRICAO=:DESCRICAO WHERE ID=:ID')
-         .Params('DESCRICAO',FPedidos.Descricao)
-         .Params('ID',FPedidos.Id)
-         .ExecSQL
+         .SQL('UPDATE PEDIDOS SET PESSOA = :PESSOA, DATA = :DATA '+
+              'WHERE ID = :ID')
+         .Params('PESSOA', FPedidos.Pessoa)
+         .Params('DATA', FPedidos.Data)
+         .Params('ID', FPedidos.Id)
+         .ExecSQL;
+      MessageDlg('Pedido Atualizado!', mtInformation, [mbOK], 0);
    except on e:Exception do
-      raise Exception.Create('Error ao tentar atualizar o resgistro: '+e.Message);
+      raise Exception.Create('Error ao tentar atualizar o pedido: '+e.Message);
    end;
 end;
 
@@ -70,11 +74,12 @@ begin
    Result := Self;
    try
       FConexao
-         .SQL('DELETE FROM PEDIDOS WHERE ID=:ID')
-         .Params('ID',FPedidos.Id)
+         .SQL('DELETE FROM PEDIDOS WHERE ID = :ID')
+         .Params('ID', FPedidos.Id)
          .ExecSQL;
+      MessageDlg('Pedido Excluído!', mtInformation, [mbOK], 0);
    except on e:Exception do
-      raise Exception.Create('Error ao tentar exluir o registro: '+e.Message);
+      raise Exception.Create('Error ao tentar exluir o pedido: '+e.Message);
    end;
 end;
 
@@ -83,11 +88,12 @@ begin
    Result := Self;
    try
       FConexao
-         .SQL('DELETE FROM PEDIDOS WHERE ID=:ID')
-         .Params('ID',Id)
+         .SQL('DELETE FROM PEDIDOS WHERE ID = :ID')
+         .Params('ID', Id)
          .ExecSQL;
+      MessageDlg('Pedido Excluído!', mtInformation, [mbOK], 0);
    except on e:Exception do
-      raise Exception.Create('Error ao tentar exluir o registro: '+e.Message);
+      raise Exception.Create('Error ao tentar exluir o pedido: '+e.Message);
    end;
 end;
 
@@ -96,11 +102,15 @@ begin
    Result := Self;
    try
       FConexao
-        .SQL('INSERT INTO PEDIDOS (DESCRICAO) VALUES (:DESCRICAO)')
-        .Params('DESCRICAO', FPedidos.Descricao)
+        .SQL('INSERT INTO PEDIDOS (PESSOA, TIPO, DATA) '+
+             'VALUES (:PESSOA, :TIPO, :DATA)')
+        .Params('PESSOA', FPedidos.Pessoa)
+        .Params('TIPO', FPedidos.Tipo)
+        .Params('DATA', FPedidos.Data)
         .ExecSQL;
+      MessageDlg('Pedido Salvo!', mtInformation, [mbOK], 0);
    except on e:Exception do
-      raise Exception.Create('Erro ao tentar inserir os dados: '+ e.Message);
+      raise Exception.Create('Erro ao tentar inserir o pedido: '+ e.Message);
    end;
 end;
 
@@ -109,7 +119,8 @@ begin
    Result := Self;
    FDataSet :=
       FConexao
-         .SQL('SELECT * FROM PEDIDOS')
+         .SQL('SELECT * FROM PEDIDOS WHERE TIPO = :TIPO ')
+         .Params('TIPO', FPedidos.Tipo)
          .Open
          .DataSet;
 end;
@@ -119,9 +130,10 @@ begin
    Result := Self;
    FDataSet :=
       FConexao
-         .SQL('SELECT * FROM PEDIDOS WHERE ID=:ID')
-         .Params('ID',FPedidos.Id)
-         .Open.DataSet;
+         .SQL('SELECT * FROM PEDIDOS WHERE ID = :ID')
+         .Params('ID', FPedidos.Id)
+         .Open
+         .DataSet;
 end;
 
 class function TDAOPedido.New: iDAOEntity<TPedidos>;

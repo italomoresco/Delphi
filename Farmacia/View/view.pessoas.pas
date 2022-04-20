@@ -73,7 +73,6 @@ begin
    dsSearch.DataSet.Insert;
    if pcMain.ActivePageIndex = 0 then
       pcMain.ActivePageIndex := 1;
-
 end;
 
 procedure TfrmPessoas.btnSaveClick(Sender: TObject);

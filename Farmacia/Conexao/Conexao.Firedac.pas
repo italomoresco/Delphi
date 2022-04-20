@@ -41,7 +41,7 @@ begin
    FQuery.Connection := FConexao;
    FConexao.Params.Clear;
    FConexao.Params.Add('DriverID=SQLite');
-   FConexao.Params.Add('DataBase=C:\Users\italo\Documents\Delphi\Farmacia\DataBase\dadosNOVOS.sdb');
+   FConexao.Params.Add('DataBase=C:\Users\italo\Documents\Delphi\Farmacia\dadosNOVOS.sdb');
    FConexao.Params.Add('LockingMode=Normal');
    FConexao.Connected := True;
 end;

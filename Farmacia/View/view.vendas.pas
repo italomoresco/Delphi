@@ -26,13 +26,13 @@ type
     edtQuantity: TDBEdit;
     edtPrice: TDBEdit;
     procedure btnSearchClick(Sender: TObject);
-    procedure btnEditClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btnExcluirClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
   private
     { Private declarations }
     FControle: iControle;
+    procedure ListarTodos;
   public
     { Public declarations }
   end;
@@ -44,17 +44,11 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmVendas.btnEditClick(Sender: TObject);
-begin
-  inherited;
-   FControle.Entidades.PedidosItens.ListarPorId(dsSearch.DataSet.FieldByName('ID').AsInteger).DataSet(dsItens);
-end;
-
-procedure TfrmVendas.btnExcluirClick(Sender: TObject);
+procedure TfrmVendas.btnDeleteClick(Sender: TObject);
 begin
   inherited;
    if pcVenda.ActivePageIndex = 0 then
-   begin  
+   begin
       FControle
         .Entidades
         .Pedidos
@@ -69,8 +63,7 @@ begin
         .Entidades
         .PedidosItens
           .This
-            .Item(dsItens.DataSet.FieldByName('ITEM').AsInteger)
-            .IdPedido(dsSearch.DataSet.FieldByName('ID').AsInteger)
+            .Id(dsItens.DataSet.FieldByName('ID').AsInteger)
           .&End
         .Excluir;
    end;
@@ -81,13 +74,15 @@ begin
   inherited;
    if pcVenda.ActivePageIndex = 0 then
    begin
-      if dsSearch.DataSet.FieldByName('ID').AsString.IsEmpty then
+      if dsSearch.State = dsInsert then
       begin
          FControle
            .Entidades
            .Pedidos
              .This
-               .Descricao(dsSearch.DataSet.FieldByName('DESCRICAO').AsString)
+               .Tipo('C')
+               .Pessoa(dsSearch.DataSet.FieldByName('PESSOA').AsInteger)
+               .Data(dsSearch.DataSet.FieldByName('DATA').AsDateTime)
              .&End
            .Inserir;
       end
@@ -98,36 +93,78 @@ begin
            .Pedidos
              .This
                .Id(dsSearch.DataSet.FieldByName('ID').AsInteger)
-               .Descricao(dsSearch.DataSet.FieldByName('DESCRICAO').AsString)
+               .Pessoa(dsSearch.DataSet.FieldByName('PESSOA').AsInteger)
+               .Data(dsSearch.DataSet.FieldByName('DATA').AsDateTime)
              .&End
            .Atualizar;
       end;
    end
    else
    begin
-      FControle
-        .Entidades
-        .PedidosItens
-          .This
-            .Item(dsItens.DataSet.FieldByName('ITEM').AsInteger)
-            .IdPedido(dsSearch.DataSet.FieldByName('ID').AsInteger)
-            .Produto('amendoim')
-            .Quantidade(dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
-          .&End
-        .Inserir;   
+      if dsItens.State = dsInsert then
+      begin
+         FControle
+           .Entidades
+           .PedidosItens
+             .This
+               .Produto(dsItens.DataSet.FieldByName('PRODUTO').AsInteger)
+               .IdPedido(dsSearch.DataSet.FieldByName('ID').AsInteger)
+               .Quantidade(dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+               .Valor(dsItens.DataSet.FieldByName('VALOR').AsFloat)
+               .ValorTotal(dsItens.DataSet.FieldByName('VALOR').AsFloat*dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+             .&End
+           .Inserir;
+      end
+      else
+      begin
+         FControle
+           .Entidades
+           .PedidosItens
+             .This
+               .Produto(dsItens.DataSet.FieldByName('PRODUTO').AsInteger)
+               .IdPedido(dsSearch.DataSet.FieldByName('ID').AsInteger)
+               .Quantidade(dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+               .Valor(dsItens.DataSet.FieldByName('VALOR').AsFloat)
+               .ValorTotal(dsItens.DataSet.FieldByName('VALOR').AsFloat*dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+             .&End
+           .Atualizar;
+      end;
    end;
 end;
 
 procedure TfrmVendas.btnSearchClick(Sender: TObject);
 begin
   inherited;
-   FControle.Entidades.Pedidos.Listar.DataSet(dsSearch);
+   ListarTodos;
 end;
 
 procedure TfrmVendas.FormCreate(Sender: TObject);
 begin
   inherited;
    FControle := TControle.New;
+   ListarTodos;
+end;
+
+procedure TfrmVendas.ListarTodos;
+begin
+   //Pedidos
+   FControle
+     .Entidades
+     .Pedidos
+       .This
+         .Tipo('V')
+       .&End
+     .Listar
+     .DataSet(dsSearch);
+   //Itens
+   FControle
+     .Entidades
+     .PedidosItens
+       .This
+         .IdPedido(dsSearch.DataSet.FieldByName('ID_PEDIDO').AsInteger)
+       .&End
+     .Listar
+     .DataSet(dsItens);
 end;
 
 end.

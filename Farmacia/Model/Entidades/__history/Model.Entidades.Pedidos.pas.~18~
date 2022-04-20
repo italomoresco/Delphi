@@ -1,0 +1,105 @@
+unit Model.Entidades.Pedidos;
+
+interface
+
+uses
+  Model.Dao.Interfaces;
+
+type
+  TPedidos = class
+  private
+    [weak]
+    FParent: iDAOEntity<TPedidos>;
+    FTipo: string;
+    FValorTotal: Double;
+    FData: TDate;
+    FId: Integer;
+  public
+    constructor Create(Parent: iDAOEntity<TPedidos>);
+    destructor Destroy; override;
+    function Id(Value: Integer): TPedidos; overload;
+    function Id: Integer; overload;
+    function Data(Value: TDate): TPedidos; overload;
+    function Data: TDate; overload;
+    function ValorTotal(Value: Double): TPedidos; overload;
+    function ValorTotal: Double; overload;
+    function Tipo(Value: string): TPedidos; overload;
+    function Tipo: string; overload;
+    function &End: iDAOEntity<TPedidos>;
+  end;
+
+implementation
+
+{ TPedidos }
+
+function TPedidos.&End: iDAOEntity<TPedidos>;
+begin
+   Result := FParent;
+end;
+
+constructor TPedidos.Create(Parent: iDAOEntity<TPedidos>);
+begin
+   FParent := Parent;
+end;
+
+function TPedidos.Descricao(Value: String): TPedidos;
+begin
+   Result := Self;
+   FDescricao := Value;
+end;
+
+function TPedidos.Data(Value: TDate): TPedidos;
+begin
+   Result := Self;
+   FData := Value;
+end;
+
+function TPedidos.Data: TDate;
+begin
+   Result := FData;
+end;
+
+function TPedidos.Descricao: String;
+begin
+   Result := FDescricao;
+end;
+
+destructor TPedidos.Destroy;
+begin
+  inherited;
+end;
+
+function TPedidos.Id(Value: Integer): TPedidos;
+begin
+   Result := Self;
+   FId := Value;
+end;
+
+function TPedidos.Id: Integer;
+begin
+   Result := FId;
+end;
+
+function TPedidos.Tipo: string;
+begin
+   Result := FTipo;
+end;
+
+function TPedidos.Tipo(Value: string): TPedidos;
+begin
+   Result := Self;
+   FTipo := Value;
+end;
+
+function TPedidos.ValorTotal(Value: Double): TPedidos;
+begin
+   Result := Self;
+   FValorTotal := Value;
+end;
+
+function TPedidos.ValorTotal: Double;
+begin
+   Result := FValorTotal;
+end;
+
+end.

@@ -5,12 +5,8 @@ inherited frmVendas: TfrmVendas
   TextHeight = 13
   inherited pnlMain: TPanel
     inherited pnlButtons: TPanel
-      ExplicitTop = -5
       inherited btnSave: TButton
         OnClick = btnSaveClick
-      end
-      inherited btnExcluir: TButton
-        OnClick = btnExcluirClick
       end
     end
     inherited pcMain: TPageControl
@@ -35,7 +31,7 @@ inherited frmVendas: TfrmVendas
           Align = alClient
           TabOrder = 0
           object pcSale: TTabSheet
-            Caption = 'Venda'
+            Caption = 'Pedido'
             object lblCode: TLabel
               Left = 12
               Top = 7

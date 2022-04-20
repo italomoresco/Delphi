@@ -36,15 +36,18 @@ begin
    Result := Self;
    try
       FConexao
-         .SQL('UPDATE PEDIDOITENS SET PRODUTO=:PRODUTO, QUANTIDADE=:QUANTIDADE '+
-             'WHERE ITEM=:ITEM AND ID_PEDIDO=:IDPEDIDO')
+         .SQL('UPDATE PEDIDOITENS SET '+
+              'PRODUTO = :PRODUTO, QUANTIDADE = :QUANTIDADE, '+
+              'VALOR = :VALOR, VALOR_TOTAL = :VALOR_TOTAL '+
+              'WHERE ID = :ID')
             .Params('PRODUTO', FPedidosItens.Produto)
-            .Params('QUANTIDADE',FPedidosItens.Quantidade)
-            .Params('ITEM',FPedidosItens.Item)
-            .Params('IDPEDIDO',FPedidosItens.IdPedido)
+            .Params('QUANTIDADE', FPedidosItens.Quantidade)
+            .Params('VALOR', FPedidosItens.Valor)
+            .Params('VALOR_TOTAL', FPedidosItens.ValorTotal)
+            .Params('ID', FPedidosItens.Id)
          .ExecSQL;
    except on e:Exception do
-      raise Exception.Create('Error ao tentar atualizar os registro: '+e.Message);
+      raise Exception.Create('Error ao tentar atualizar o registro: '+e.Message);
    end;
 end;
 
@@ -75,9 +78,8 @@ begin
    Result := Self;
    try
       FConexao
-         .SQL('DELETE FROM PEDIDOITENS WHERE ITEM=:ITEM AND ID_PEDIDO=:IDPEDIDO')
-            .Params('ITEM',FPedidosItens.Item)
-            .Params('IDPEDIDO',FPedidosItens.IdPedido)
+         .SQL('DELETE FROM PEDIDOITENS WHERE ID = :ID')
+            .Params('ID', FPedidosItens.Id)
          .ExecSQL;
    except on e:Exception do
       raise Exception.Create('Error ao tentar excluir o registro: '+e.Message);
@@ -89,7 +91,8 @@ begin
    Result := Self;
    try
       FConexao
-         .SQL('DELETE FROM PEDIDOITENS WHERE ID=:ID')
+         .SQL('DELETE FROM PEDIDOITENS WHERE ID = :ID')
+            .Params('ID', Id)
          .ExecSQL;
    except on e:Exception do
       raise Exception.Create('Error ao tentar excluir o registro: '+e.Message);
@@ -101,12 +104,16 @@ begin
    Result := Self;
    try
       FConexao
-         .SQL('INSERT INTO PEDIDOITENS (ITEM,ID_PEDIDO, PRODUTO, QUANTIDADE) VALUES '+
-               '(:ITEM,:ID_PEDIDO,:PRODUTO,:QUANTIDADE)')
-            .Params('ITEM',FPedidosItens.Item)
+         .SQL('INSERT INTO PEDIDOITENS '+
+              '(ID, ID_PEDIDO, PRODUTO, QUANTIDADE, VALOR, VALOR_TOTAL) '+
+              'VALUES '+
+              '((SELECT COALESCE(MAX(ID), 0) FROM PEDIDOITENS)+1, '+              
+              ':ID_PEDIDO, :PRODUTO, :QUANTIDADE, :VALOR, :VALOR_TOTAL)')
             .Params('ID_PEDIDO', FPedidosItens.IdPedido)
-            .Params('PRODUTO',FPedidosItens.Produto)
-            .Params('QUANTIDADE',FPedidosItens.Quantidade)
+            .Params('PRODUTO', FPedidosItens.Produto)
+            .Params('QUANTIDADE', FPedidosItens.Quantidade)
+            .Params('VALOR', FPedidosItens.Valor)
+            .Params('VALOR_TOTAL', FPedidosItens.ValorTotal)
          .ExecSQL;
    except on e:Exception do
       raise Exception.Create('Error ao tentar inserir o registro: '+e.Message);
@@ -118,7 +125,8 @@ begin
    Result := Self;
    FDataSet :=
      FConexao
-        .SQL('SELECT * FROM PEDIDOITENS')
+        .SQL('SELECT * FROM PEDIDOITENS WHERE ID_PEDIDO = :ID_PEDIDO')
+           .Params('ID_PEDIDO', FPedidosItens.IdPedido)
         .Open.DataSet;
 end;
 
@@ -127,8 +135,8 @@ begin
    Result := Self;
    FDataSet :=
       FConexao
-         .SQL('SELECT * FROM PEDIDOITENS WHERE ID_PEDIDO=:ID')
-            .Params('ID',id)
+         .SQL('SELECT * FROM PEDIDOITENS WHERE ID = :ID')
+            .Params('ID', Id)
          .Open.DataSet;
 end;
 

@@ -10,21 +10,27 @@ type
   private
     [weak]
     FParent: iDAOEntity<TPedidosItens>;
-    FProduto: String;
-    FItem: Integer;
+    FValor: Double;
+    FValorTotal: Double;
     FQuantidade: Integer;
+    FProduto: Integer;
     FIdPedido: Integer;
+    FId: Integer;
   public
     constructor Create(Parent: iDAOEntity<TPedidosItens>);
     destructor Destroy; override;
-    function Item(Value: Integer): TPedidosItens; overload;
-    function Item: Integer; overload;
+    function Id(Value: Integer): TPedidosItens; overload;
+    function Id: Integer; overload;
     function IdPedido(Value: Integer): TPedidosItens; overload;
     function IdPedido: Integer; overload;
-    function Produto(Value: String): TPedidosItens; overload;
-    function Produto: String; overload;
+    function Produto(Value: Integer): TPedidosItens; overload;
+    function Produto: Integer; overload;
     function Quantidade(Value: Integer): TPedidosItens; overload;
     function Quantidade: Integer; overload;
+    function Valor(Value: Double): TPedidosItens; overload;
+    function Valor: Double; overload;
+    function ValorTotal(Value: Double): TPedidosItens; overload;
+    function ValorTotal: Double; overload;
     function &End: iDAOEntity<TPedidosItens>;
   end;
 
@@ -58,26 +64,26 @@ begin
    Result := FIdPedido;
 end;
 
-function TPedidosItens.Item: Integer;
-begin
-   Result := FItem;
-end;
-
-function TPedidosItens.Item(Value: Integer): TPedidosItens;
-begin
-   Result := Self;
-   FItem := Value;
-end;
-
-function TPedidosItens.Produto: String;
+function TPedidosItens.Produto: Integer;
 begin
    Result := FProduto;
 end;
 
-function TPedidosItens.Produto(Value: String): TPedidosItens;
+function TPedidosItens.Produto(Value: Integer): TPedidosItens;
 begin
    Result := Self;
    FProduto := Value;
+end;
+
+function TPedidosItens.Id: Integer;
+begin
+   Result := FId;
+end;
+
+function TPedidosItens.Id(Value: Integer): TPedidosItens;
+begin
+   Result := Self;
+   FId := Value;
 end;
 
 function TPedidosItens.Quantidade(Value: Integer): TPedidosItens;
@@ -89,6 +95,28 @@ end;
 function TPedidosItens.Quantidade: Integer;
 begin
    Result := FQuantidade;
+end;
+
+function TPedidosItens.Valor: Double;
+begin
+   Result := FValor;
+end;
+
+function TPedidosItens.ValorTotal: Double;
+begin
+   Result := FValorTotal;
+end;
+
+function TPedidosItens.ValorTotal(Value: Double): TPedidosItens;
+begin
+   Result := Self;
+   FValorTotal := Value;
+end;
+
+function TPedidosItens.Valor(Value: Double): TPedidosItens;
+begin
+   Result := Self;
+   FValor := Value;
 end;
 
 end.
