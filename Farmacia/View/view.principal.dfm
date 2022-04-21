@@ -3,8 +3,8 @@ object frmPrincipal: TfrmPrincipal
   Top = 0
   BorderStyle = bsSingle
   Caption = 'Gestor Farm'#225'cia'
-  ClientHeight = 344
-  ClientWidth = 605
+  ClientHeight = 496
+  ClientWidth = 880
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,17 +18,20 @@ object frmPrincipal: TfrmPrincipal
   object pnlMain: TPanel
     Left = 0
     Top = 0
-    Width = 605
-    Height = 344
+    Width = 880
+    Height = 496
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 605
+    ExplicitHeight = 344
     object pnlOptions: TPanel
       Left = 1
       Top = 1
-      Width = 603
+      Width = 878
       Height = 96
       Align = alTop
       TabOrder = 0
+      ExplicitWidth = 603
       object btnPurchases: TBitBtn
         Left = 24
         Top = 11
@@ -2110,7 +2113,7 @@ object frmPrincipal: TfrmPrincipal
         Top = 11
         Width = 75
         Height = 75
-        Hint = 'Vendas'
+        Hint = 'Sair'
         Glyph.Data = {
           42400000424D4240000000000000420000002800000040000000400000000100
           20000300000000400000130B0000130B000000000000000000000000FF0000FF
@@ -2630,6 +2633,7 @@ object frmPrincipal: TfrmPrincipal
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
+        OnClick = btnExitClick
       end
     end
   end

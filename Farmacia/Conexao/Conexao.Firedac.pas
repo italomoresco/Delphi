@@ -7,7 +7,7 @@ uses
   Firedac.Stan.Def, Firedac.Stan.Pool, Firedac.Stan.Async, Firedac.Phys, Firedac.Phys.SQLite,
   Firedac.Phys.SQLiteDef, Firedac.Stan.ExprFuncs, Firedac.Phys.SQLiteWrapper.Stat,
   Firedac.VCLUI.Wait, Firedac.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS,  FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet, Conexao.Interfaces, Data.DB;
+  FireDAC.DApt, FireDAC.Comp.DataSet, Conexao.Interfaces, Data.DB, SysUtils, Forms;
 
 type
   TModelConexao = class(TInterfacedObject, iConexao)
@@ -41,7 +41,8 @@ begin
    FQuery.Connection := FConexao;
    FConexao.Params.Clear;
    FConexao.Params.Add('DriverID=SQLite');
-   FConexao.Params.Add('DataBase=C:\Users\italo\Documents\Delphi\Farmacia\dadosNOVOS.sdb');
+   //FConexao.Params.Add('DataBase=C:\Users\italo\Documents\Delphi\Farmacia\dadosNOVOS.sdb');
+   FConexao.Params.Add(ExtractFilePath(Application.ExeName)+'dados.sdb');
    FConexao.Params.Add('LockingMode=Normal');
    FConexao.Connected := True;
 end;

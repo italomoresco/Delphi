@@ -54,6 +54,7 @@ begin
          .Id(dsSearch.DataSet.FieldByName('ID').AsInteger)
        .&End
      .Excluir;
+   ListarTodos;
 end;
 
 procedure TfrmProdutos.btnNewClick(Sender: TObject);
@@ -63,11 +64,21 @@ begin
    dsSearch.DataSet.Insert;
    if pcMain.ActivePageIndex = 0 then
       pcMain.ActivePageIndex := 1;
+   edtName.SetFocus;
 end;
 
 procedure TfrmProdutos.btnSaveClick(Sender: TObject);
+var
+   vProduto: Integer;
 begin
   inherited;
+   if dsSearch.DataSet.FieldByName('DESCRICAO').AsString.Trim.IsEmpty then
+   begin
+      MessageDlg('Informe a Descrição!', mtWarning, [mbOK], 0);
+      edtName.SetFocus;
+      Exit;
+   end;
+
    if dsSearch.DataSet.State = dsInsert then
    begin
       FControle
@@ -78,9 +89,12 @@ begin
             .Valor(dsSearch.DataSet.FieldByName('VALOR').AsFloat)
           .&End
         .Inserir;
+      ListarTodos;
+      dsSearch.DataSet.Last;
    end
    else
    begin
+      vProduto := dsSearch.DataSet.FieldByName('ID').AsInteger;
       FControle
         .Entidades
         .Produto
@@ -90,6 +104,8 @@ begin
             .Valor(dsSearch.DataSet.FieldByName('VALOR').AsFloat)
           .&End
         .Atualizar;
+      ListarTodos;
+      dsSearch.DataSet.Locate('ID', VarArrayOf([vProduto]), []);
    end;
 end;
 

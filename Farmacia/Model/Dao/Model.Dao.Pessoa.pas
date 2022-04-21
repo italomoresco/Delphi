@@ -3,7 +3,8 @@ unit Model.Dao.Pessoa;
 interface
 
 uses
-  Model.Dao.Interfaces, Model.Entidades.Pessoa, Data.DB, Conexao.Interfaces, Conexao.Firedac;
+  Model.Dao.Interfaces, Model.Entidades.Pessoa, Data.DB, Conexao.Interfaces,
+  Conexao.Firedac, Vcl.Dialogs;
 
 type
   TDAOPessoa = class(TInterfacedObject, iDAOEntity<TPessoa>)
@@ -48,7 +49,8 @@ begin
          .Params('TIPO',FPessoa.Tipo)
          .Params('DOCUMENTO',FPessoa.Documento)
          .Params('ID',FPessoa.Id)
-         .ExecSQL
+         .ExecSQL;
+      MessageDlg('Pessoa Atualizada!', mtInformation, [mbOK], 0);
    except on e:Exception do
       raise Exception.Create('Error ao tentar atualizar o resgistro: '+e.Message);
    end;
@@ -84,6 +86,7 @@ begin
          .SQL('DELETE FROM PESSOA WHERE ID=:ID')
          .Params('ID', FPessoa.Id)
          .ExecSQL;
+      MessageDlg('Pessoa Excluída!', mtInformation, [mbOK], 0);
    except on e:Exception do
       raise Exception.Create('Error ao tentar exluir o registro: '+e.Message);
    end;
@@ -97,6 +100,7 @@ begin
          .SQL('DELETE FROM PESSOA WHERE ID=:ID')
          .Params('ID', Id)
          .ExecSQL;
+      MessageDlg('Pessoa Excluída!', mtInformation, [mbOK], 0);
    except on e:Exception do
       raise Exception.Create('Error ao tentar exluir o registro: '+e.Message);
    end;
@@ -120,6 +124,7 @@ begin
            .Params('TIPO',FPessoa.Tipo)
            .Params('DOCUMENTO',FPessoa.Documento)
         .ExecSQL;
+      MessageDlg('Pessoa Cadastrada!', mtInformation, [mbOK], 0);
    except on e:Exception do
       raise Exception.Create('Erro ao tentar inserir os dados: '+ e.Message);
    end;

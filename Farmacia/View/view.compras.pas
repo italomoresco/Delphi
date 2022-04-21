@@ -24,10 +24,10 @@ type
     edtProduct: TDBEdit;
     edtQuantity: TDBEdit;
     edtPrice: TDBEdit;
-    dbgProduct: TDBGrid;
     dsItens: TDataSource;
     edtDate: TDBEdit;
     lblDate: TLabel;
+    dbgProduct: TDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure btnSearchClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
@@ -36,6 +36,7 @@ type
     procedure btnCancelClick(Sender: TObject);
     procedure dsSearchDataChange(Sender: TObject; Field: TField);
     procedure dsItensDataChange(Sender: TObject; Field: TField);
+    procedure edtPriceExit(Sender: TObject);
   private
     { Private declarations }
     FControle: iControle;
@@ -91,9 +92,8 @@ begin
    if (pcMain.ActivePageIndex = 1) and
       (pcCompra.ActivePageIndex = 1) then
    begin
-      ListarItens;
-      dsItens.DataSet.Append;
-      //dsItens.DataSet.Insert;
+      //ListarItens;
+      dsItens.DataSet.Insert;
       edtProduct.SetFocus;
    end
    else
@@ -124,6 +124,13 @@ var
    vPedido: Integer;
 begin
   inherited;
+   if dsSearch.DataSet.FieldByName('PESSOA').AsString.Trim.IsEmpty then
+   begin
+      MessageDlg('Informe o Fornecedor!', mtWarning, [mbOK], 0);
+      edtProvider.SetFocus;
+      Exit;
+   end;
+
    if pcCompra.ActivePageIndex = 0 then
    begin
       if dsSearch.State = dsInsert then
@@ -172,15 +179,14 @@ begin
            .Entidades
            .PedidosItens
              .This
+               .Id(dsItens.DataSet.FieldByName('ID').AsInteger)
                .Produto(dsItens.DataSet.FieldByName('PRODUTO').AsInteger)
-               .IdPedido(dsSearch.DataSet.FieldByName('ID').AsInteger)
                .Quantidade(dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
                .Valor(dsItens.DataSet.FieldByName('VALOR').AsFloat)
                .ValorTotal(dsItens.DataSet.FieldByName('VALOR').AsFloat*dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
              .&End
            .Atualizar;
       end;
-      AtualizaPedido;
       ListarTodos;
       dsSearch.DataSet.Locate('ID', VarArrayOf([vPedido]), []);
       ListarItens;
@@ -195,18 +201,25 @@ end;
 
 procedure TfrmCompras.dsItensDataChange(Sender: TObject; Field: TField);
 begin
-//   if dsItens.State in [dsEdit, dsInsert] then
-//      dsSearch.Edit;
-//   btnSave.Enabled    := (dsItens.State in [dsEdit, dsInsert]) or (dsSearch.State in [dsEdit, dsInsert]);
-//   btnCancel.Enabled  := (dsItens.State in [dsEdit, dsInsert]) or (dsSearch.State in [dsEdit, dsInsert]);
-//   btnNew.Enabled     := (dsItens.State = dsBrowse) or (dsSearch.State = dsBrowse);
-//   btnDelete.Enabled  := (dsItens.State = dsBrowse) or (dsSearch.State = dsBrowse);
+   if pcCompra.ActivePageIndex = 1 then
+   begin
+      btnSave.Enabled    := (dsItens.State in [dsEdit, dsInsert]) or (dsSearch.State in [dsEdit, dsInsert]);
+      btnCancel.Enabled  := (dsItens.State in [dsEdit, dsInsert]) or (dsSearch.State in [dsEdit, dsInsert]);
+      btnNew.Enabled     := (dsItens.State = dsBrowse) or (dsSearch.State = dsBrowse);
+      btnDelete.Enabled  := (dsItens.State = dsBrowse) or (dsSearch.State = dsBrowse);
+   end;
 end;
 
 procedure TfrmCompras.dsSearchDataChange(Sender: TObject; Field: TField);
 begin
   inherited;
    ListarItens;
+end;
+
+procedure TfrmCompras.edtPriceExit(Sender: TObject);
+begin
+  inherited;
+   btnSave.SetFocus;
 end;
 
 procedure TfrmCompras.FormCreate(Sender: TObject);

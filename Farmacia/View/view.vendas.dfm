@@ -5,12 +5,20 @@ inherited frmVendas: TfrmVendas
   TextHeight = 13
   inherited pnlMain: TPanel
     inherited pnlButtons: TPanel
+      inherited btnNew: TButton
+        OnClick = btnNewClick
+      end
       inherited btnSave: TButton
         OnClick = btnSaveClick
       end
+      inherited btnCancel: TButton
+        OnClick = btnCancelClick
+      end
+      inherited btnDelete: TButton
+        OnClick = btnDeleteClick
+      end
     end
     inherited pcMain: TPageControl
-      ActivePage = TabSheet2
       inherited TabSheet1: TTabSheet
         inherited pnlSearch: TPanel
           inherited btnSearch: TButton
@@ -18,7 +26,35 @@ inherited frmVendas: TfrmVendas
           end
         end
         inherited dbgSearch: TDBGrid
-          DataSource = dsSearch
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Title.Caption = 'C'#243'digo'
+              Width = 50
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PESSOA'
+              Title.Caption = 'C'#243'digo Cliente'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA'
+              Title.Caption = 'Data Compra'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VALOR_TOTAL'
+              Title.Caption = 'Valor Total'
+              Width = 100
+              Visible = True
+            end>
         end
       end
       inherited TabSheet2: TTabSheet
@@ -46,13 +82,21 @@ inherited frmVendas: TfrmVendas
               Height = 13
               Caption = 'Cliente'
             end
+            object lblDate: TLabel
+              Left = 22
+              Top = 61
+              Width = 23
+              Height = 13
+              Caption = 'Data'
+            end
             object edtCode: TDBEdit
               Left = 51
               Top = 3
               Width = 121
               Height = 21
-              DataField = 'Id'
+              DataField = 'ID'
               DataSource = dsSearch
+              ReadOnly = True
               TabOrder = 0
             end
             object edtCustomer: TDBEdit
@@ -60,9 +104,18 @@ inherited frmVendas: TfrmVendas
               Top = 30
               Width = 121
               Height = 21
-              DataField = 'Descricao'
+              DataField = 'PESSOA'
               DataSource = dsSearch
               TabOrder = 1
+            end
+            object edtDate: TDBEdit
+              Left = 51
+              Top = 57
+              Width = 121
+              Height = 21
+              DataField = 'DATA'
+              DataSource = dsSearch
+              TabOrder = 2
             end
           end
           object TabSheet4: TTabSheet
@@ -102,7 +155,7 @@ inherited frmVendas: TfrmVendas
                 Top = 5
                 Width = 121
                 Height = 21
-                DataField = 'ITEM'
+                DataField = 'PRODUTO'
                 DataSource = dsItens
                 TabOrder = 0
               end
@@ -120,7 +173,10 @@ inherited frmVendas: TfrmVendas
                 Top = 5
                 Width = 121
                 Height = 21
+                DataField = 'VALOR'
+                DataSource = dsItens
                 TabOrder = 2
+                OnExit = edtPriceExit
               end
             end
             object dbgProduct: TDBGrid
@@ -130,12 +186,49 @@ inherited frmVendas: TfrmVendas
               Height = 211
               Align = alClient
               DataSource = dsItens
+              Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+              ReadOnly = True
               TabOrder = 1
               TitleFont.Charset = DEFAULT_CHARSET
               TitleFont.Color = clWindowText
               TitleFont.Height = -11
               TitleFont.Name = 'Tahoma'
               TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'PRODUTO'
+                  Title.Caption = 'C'#243'digo Produto'
+                  Width = 80
+                  Visible = True
+                end
+                item
+                  Alignment = taRightJustify
+                  Expanded = False
+                  FieldName = 'VALOR'
+                  Title.Alignment = taRightJustify
+                  Title.Caption = 'Valor Unit'#225'rio'
+                  Width = 80
+                  Visible = True
+                end
+                item
+                  Alignment = taRightJustify
+                  Expanded = False
+                  FieldName = 'QUANTIDADE'
+                  Title.Alignment = taRightJustify
+                  Title.Caption = 'Quantidade'
+                  Width = 80
+                  Visible = True
+                end
+                item
+                  Alignment = taRightJustify
+                  Expanded = False
+                  FieldName = 'VALOR_TOTAL'
+                  Title.Alignment = taRightJustify
+                  Title.Caption = 'Valor Total'
+                  Width = 80
+                  Visible = True
+                end>
             end
           end
         end
@@ -143,6 +236,7 @@ inherited frmVendas: TfrmVendas
     end
   end
   object dsItens: TDataSource
+    OnDataChange = dsItensDataChange
     Left = 440
     Top = 8
   end

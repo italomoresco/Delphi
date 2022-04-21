@@ -3,7 +3,8 @@ unit Model.Dao.Produto;
 interface
 
 uses
-  Model.Dao.Interfaces, Model.Entidades.Produto, Data.DB, Conexao.Interfaces, Conexao.Firedac;
+  Model.Dao.Interfaces, Model.Entidades.Produto, Data.DB, Conexao.Interfaces,
+  Conexao.Firedac, Vcl.Dialogs;
 
 type
   TDAOProduto = class(TInterfacedObject, iDAOEntity<TProduto>)
@@ -39,7 +40,8 @@ begin
          .Params('DESCRICAO',FProduto.Descricao)
          .Params('VALOR',FProduto.Valor)
          .Params('ID',FProduto.Id)
-         .ExecSQL
+         .ExecSQL;
+      MessageDlg('Produto Atualizado!', mtInformation, [mbOK], 0);
    except on e:Exception do
       raise Exception.Create('Error ao tentar atualizar o resgistro: '+e.Message);
    end;
@@ -75,6 +77,7 @@ begin
          .SQL('DELETE FROM PRODUTO WHERE ID=:ID')
          .Params('ID',FProduto.Id)
          .ExecSQL;
+      MessageDlg('Produto Excluído!', mtInformation, [mbOK], 0);
    except on e:Exception do
       raise Exception.Create('Error ao tentar exluir o registro: '+e.Message);
    end;
@@ -88,6 +91,7 @@ begin
          .SQL('DELETE FROM PRODUTO WHERE ID=:ID')
          .Params('ID',Id)
          .ExecSQL;
+      MessageDlg('Produto Excluído!', mtInformation, [mbOK], 0);
    except on e:Exception do
       raise Exception.Create('Error ao tentar exluir o registro: '+e.Message);
    end;
@@ -98,10 +102,12 @@ begin
    Result := Self;
    try
       FConexao
-        .SQL('INSERT INTO PRODUTO (DESCRICAO, VALOR) VALUES (:DESCRICAO, :VALOR)')
+        .SQL('INSERT INTO PRODUTO (DESCRICAO, VALOR, ESTOQUE) '+
+             'VALUES (:DESCRICAO, :VALOR, 0)')
         .Params('DESCRICAO', FProduto.Descricao)
         .Params('VALOR', FProduto.Valor)
         .ExecSQL;
+      MessageDlg('Produto Cadastrado!', mtInformation, [mbOK], 0);
    except on e:Exception do
       raise Exception.Create('Erro ao tentar inserir os dados: '+ e.Message);
    end;

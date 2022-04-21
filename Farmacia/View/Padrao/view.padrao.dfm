@@ -10,8 +10,10 @@ object frmPadrao: TfrmPadrao
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poMainFormCenter
+  OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
@@ -95,6 +97,8 @@ object frmPadrao: TfrmPadrao
           Width = 528
           Height = 227
           Align = alBottom
+          DataSource = dsSearch
+          ReadOnly = True
           TabOrder = 1
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText

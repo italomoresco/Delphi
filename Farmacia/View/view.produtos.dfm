@@ -32,7 +32,35 @@ inherited frmProdutos: TfrmProdutos
           end
         end
         inherited dbgSearch: TDBGrid
-          DataSource = dsSearch
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Title.Caption = 'C'#243'digo'
+              Width = 50
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DESCRICAO'
+              Title.Caption = 'Produto'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VALOR'
+              Title.Caption = 'Valor'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ESTOQUE'
+              Title.Caption = 'Saldo'
+              Width = 100
+              Visible = True
+            end>
         end
       end
       inherited TabSheet2: TTabSheet
@@ -65,6 +93,7 @@ inherited frmProdutos: TfrmProdutos
           DataField = 'ID'
           DataSource = dsSearch
           Enabled = False
+          ReadOnly = True
           TabOrder = 0
         end
         object edtName: TDBEdit

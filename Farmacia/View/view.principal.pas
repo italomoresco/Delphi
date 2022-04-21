@@ -19,6 +19,7 @@ type
     procedure btnSalesClick(Sender: TObject);
     procedure btnPeopleClick(Sender: TObject);
     procedure btnProductClick(Sender: TObject);
+    procedure btnExitClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,6 +35,11 @@ implementation
 
 uses
    view.compras, view.vendas, view.pessoas, view.produtos;
+
+procedure TfrmPrincipal.btnExitClick(Sender: TObject);
+begin
+   Application.Terminate;
+end;
 
 procedure TfrmPrincipal.btnPeopleClick(Sender: TObject);
 begin

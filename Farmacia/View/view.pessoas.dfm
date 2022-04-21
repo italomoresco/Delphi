@@ -1,5 +1,5 @@
 inherited frmPessoas: TfrmPessoas
-  Caption = 'frmPessoas'
+  Caption = 'Pessoas'
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -25,6 +25,23 @@ inherited frmPessoas: TfrmPessoas
             OnClick = btnSearchClick
           end
         end
+        inherited dbgSearch: TDBGrid
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Title.Caption = 'C'#243'digo'
+              Width = 80
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOME'
+              Title.Caption = 'Nome'
+              Width = 250
+              Visible = True
+            end>
+        end
       end
       inherited TabSheet2: TTabSheet
         object lblCode: TLabel
@@ -35,8 +52,8 @@ inherited frmPessoas: TfrmPessoas
           Caption = 'C'#243'digo'
         end
         object lblName: TLabel
-          Left = 31
-          Top = 38
+          Left = 262
+          Top = 11
           Width = 27
           Height = 13
           Caption = 'Nome'
@@ -55,16 +72,9 @@ inherited frmPessoas: TfrmPessoas
           Height = 13
           Caption = 'Logradouro'
         end
-        object lblType: TLabel
-          Left = 269
-          Top = 11
-          Width = 20
-          Height = 13
-          Caption = 'Tipo'
-        end
         object lblPhone: TLabel
           Left = 25
-          Top = 119
+          Top = 38
           Width = 33
           Height = 13
           Caption = 'Celular'
@@ -98,12 +108,13 @@ inherited frmPessoas: TfrmPessoas
           DataField = 'ID'
           DataSource = dsSearch
           Enabled = False
+          ReadOnly = True
           TabOrder = 0
         end
         object edtName: TDBEdit
-          Left = 64
-          Top = 35
-          Width = 121
+          Left = 295
+          Top = 8
+          Width = 180
           Height = 21
           DataField = 'NOME'
           DataSource = dsSearch
@@ -116,7 +127,8 @@ inherited frmPessoas: TfrmPessoas
           Height = 21
           DataField = 'CEP'
           DataSource = dsSearch
-          TabOrder = 2
+          TabOrder = 4
+          OnKeyPress = edtDocumentKeyPress
         end
         object edtPublicPlace: TDBEdit
           Left = 64
@@ -125,7 +137,7 @@ inherited frmPessoas: TfrmPessoas
           Height = 21
           DataField = 'LOGRADOURO'
           DataSource = dsSearch
-          TabOrder = 3
+          TabOrder = 7
         end
         object edtDistrict: TDBEdit
           Left = 295
@@ -134,7 +146,7 @@ inherited frmPessoas: TfrmPessoas
           Height = 21
           DataField = 'BAIRRO'
           DataSource = dsSearch
-          TabOrder = 4
+          TabOrder = 8
         end
         object edtDocument: TDBEdit
           Left = 295
@@ -143,16 +155,18 @@ inherited frmPessoas: TfrmPessoas
           Height = 21
           DataField = 'DOCUMENTO'
           DataSource = dsSearch
-          TabOrder = 5
+          TabOrder = 3
+          OnKeyPress = edtDocumentKeyPress
         end
         object edtPhone: TDBEdit
           Left = 64
-          Top = 116
+          Top = 35
           Width = 121
           Height = 21
           DataField = 'TELEFONE'
           DataSource = dsSearch
-          TabOrder = 6
+          TabOrder = 2
+          OnKeyPress = edtDocumentKeyPress
         end
         object edtCity: TDBEdit
           Left = 354
@@ -161,7 +175,7 @@ inherited frmPessoas: TfrmPessoas
           Height = 21
           DataField = 'CIDADE'
           DataSource = dsSearch
-          TabOrder = 7
+          TabOrder = 6
         end
         object edtState: TDBEdit
           Left = 295
@@ -170,7 +184,8 @@ inherited frmPessoas: TfrmPessoas
           Height = 21
           DataField = 'ESTADO'
           DataSource = dsSearch
-          TabOrder = 8
+          MaxLength = 2
+          TabOrder = 5
         end
       end
     end

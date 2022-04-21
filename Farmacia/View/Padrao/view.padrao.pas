@@ -25,6 +25,7 @@ type
     procedure dsSearchDataChange(Sender: TObject; Field: TField);
     procedure pcMainChange(Sender: TObject);
     procedure dbgSearchDblClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     procedure ButtonsControl;
@@ -55,6 +56,15 @@ end;
 procedure TfrmPadrao.dsSearchDataChange(Sender: TObject; Field: TField);
 begin
    ButtonsControl;
+end;
+
+procedure TfrmPadrao.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+   if Key = #13 then
+   begin
+      Key := #0;
+      Perform(Wm_NextDlgCtl, 0, 0);
+   end;
 end;
 
 procedure TfrmPadrao.pcMainChange(Sender: TObject);
