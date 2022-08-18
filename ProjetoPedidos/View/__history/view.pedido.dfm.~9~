@@ -1,0 +1,114 @@
+inherited frmPedidos: TfrmPedidos
+  Caption = 'Pedidos de Venda'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlMain: TPanel
+    inherited pcMain: TPageControl
+      ActivePage = TabSheet2
+      inherited TabSheet1: TTabSheet
+        inherited dbgSearch: TDBGrid
+          Color = clBtnFace
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        object pcData: TPageControl
+          Left = 0
+          Top = 0
+          Width = 528
+          Height = 274
+          ActivePage = tsGeneral
+          Align = alClient
+          TabOrder = 0
+          object tsGeneral: TTabSheet
+            Caption = 'Dados Gerais'
+            object lblOrderNumber: TLabel
+              Left = 12
+              Top = 7
+              Width = 56
+              Height = 13
+              Caption = 'Nro. Pedido'
+            end
+            object lblCustomer: TLabel
+              Left = 33
+              Top = 33
+              Width = 33
+              Height = 13
+              Caption = 'Cliente'
+            end
+            object lblDate: TLabel
+              Left = 2
+              Top = 61
+              Width = 64
+              Height = 13
+              Caption = 'Data Emiss'#227'o'
+            end
+            object edtOrderNumber: TDBEdit
+              Left = 75
+              Top = 3
+              Width = 121
+              Height = 21
+              DataField = 'ID_PEDIDO'
+              DataSource = dsSearch
+              ReadOnly = True
+              TabOrder = 0
+            end
+            object edtCustomer: TDBEdit
+              Left = 72
+              Top = 30
+              Width = 121
+              Height = 21
+              DataField = 'ID_PESSOA'
+              DataSource = dsSearch
+              TabOrder = 1
+            end
+            object edtDate: TDBEdit
+              Left = 75
+              Top = 57
+              Width = 121
+              Height = 21
+              DataField = 'DATA'
+              DataSource = dsSearch
+              TabOrder = 2
+            end
+            object pnlAmount: TPanel
+              Left = 280
+              Top = 200
+              Width = 236
+              Height = 41
+              Color = 5592575
+              ParentBackground = False
+              TabOrder = 3
+              object lblAmount: TLabel
+                Left = 41
+                Top = 16
+                Width = 51
+                Height = 13
+                Caption = 'Valor Total'
+              end
+              object edtAmount: TDBEdit
+                Left = 98
+                Top = 8
+                Width = 121
+                Height = 27
+                DataField = 'VALOR_TOTAL'
+                DataSource = dsSearch
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -16
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
+                ReadOnly = True
+                TabOrder = 0
+              end
+            end
+          end
+          object tsProducts: TTabSheet
+            Caption = 'Produtos'
+            ImageIndex = 1
+          end
+        end
+      end
+    end
+  end
+end

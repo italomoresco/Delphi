@@ -1,0 +1,34 @@
+unit view.pedido;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, view.padrao, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TfrmPedidos = class(TfrmPadrao)
+    pcData: TPageControl;
+    tsGeneral: TTabSheet;
+    tsProducts: TTabSheet;
+    lblCode: TLabel;
+    lblCustomer: TLabel;
+    lblDate: TLabel;
+    edtCode: TDBEdit;
+    edtCustomer: TDBEdit;
+    edtDate: TDBEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPedidos: TfrmPedidos;
+
+implementation
+
+{$R *.dfm}
+
+end.

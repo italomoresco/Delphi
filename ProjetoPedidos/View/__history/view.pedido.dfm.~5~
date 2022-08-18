@@ -1,0 +1,15 @@
+inherited frmPedidos: TfrmPedidos
+  Caption = 'Pedidos de Venda'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlMain: TPanel
+    inherited pcMain: TPageControl
+      ActivePage = TabSheet2
+      inherited TabSheet1: TTabSheet
+        inherited dbgSearch: TDBGrid
+          Color = clBtnFace
+        end
+      end
+    end
+  end
+end
