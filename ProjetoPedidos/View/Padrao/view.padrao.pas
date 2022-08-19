@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Tabs, Vcl.ComCtrls, Data.DB, Vcl.Grids,
-  Vcl.DBGrids, Vcl.StdCtrls;//, Controller.Interfaces, Controller.Controle;
+  Vcl.DBGrids, Vcl.StdCtrls, Controller.Interfaces, Controller.Controle;
 
 type
   TfrmPadrao = class(TForm)

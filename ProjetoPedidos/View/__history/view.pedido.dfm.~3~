@@ -1,5 +1,0 @@
-inherited frmPedidos: TfrmPedidos
-  Caption = 'Pedidos de Venda'
-  PixelsPerInch = 96
-  TextHeight = 13
-end

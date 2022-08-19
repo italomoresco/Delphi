@@ -1,0 +1,322 @@
+unit view.pedido;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, view.padrao, Data.DB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Mask, Vcl.DBCtrls,
+  Controller.Interfaces, Controller.Controle, FireDAC.Phys.MySQLDef,
+  FireDAC.Stan.Intf, FireDAC.Phys, FireDAC.Phys.MySQL;
+
+type
+  TfrmPedidos = class(TfrmPadrao)
+    pcData: TPageControl;
+    tsGeneral: TTabSheet;
+    tsProducts: TTabSheet;
+    lblOrderNumber: TLabel;
+    lblCustomer: TLabel;
+    lblDate: TLabel;
+    edtOrderNumber: TDBEdit;
+    edtCustomer: TDBEdit;
+    edtDate: TDBEdit;
+    pnlAmount: TPanel;
+    lblAmount: TLabel;
+    edtAmount: TDBEdit;
+    dbgProduct: TDBGrid;
+    pnlProduct: TPanel;
+    lblProduct: TLabel;
+    lblQuantity: TLabel;
+    lblPrice: TLabel;
+    edtProduct: TDBEdit;
+    edtQuantity: TDBEdit;
+    edtPrice: TDBEdit;
+    DBComboBox1: TDBComboBox;
+    DBLookupComboBox1: TDBLookupComboBox;
+    dsItens: TDataSource;
+    dsProdutos: TDataSource;
+    procedure btnSearchClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+    procedure btnNewClick(Sender: TObject);
+    procedure btnCancelClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
+    procedure dsItensDataChange(Sender: TObject; Field: TField);
+    procedure dsSearchDataChange(Sender: TObject; Field: TField);
+    procedure edtPriceExit(Sender: TObject);
+    procedure edtDateExit(Sender: TObject);
+    procedure edtProductExit(Sender: TObject);
+    procedure dbgProductKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  private
+    { Private declarations }
+    FControle: iControle;
+    procedure ListarTodos;
+    procedure ListarItens;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPedidos: TfrmPedidos;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmPedidos.btnCancelClick(Sender: TObject);
+begin
+  inherited;
+
+   dsSearch.DataSet.Cancel;
+   dsItens.DataSet.Cancel;
+end;
+
+procedure TfrmPedidos.btnDeleteClick(Sender: TObject);
+begin
+  inherited;
+
+   if pcData.ActivePageIndex = 0 then
+   begin
+      if Application.MessageBox('Deseja excluir este Pedido?', 'EXCLUSÃO',
+                                MB_YESNO + MB_DEFBUTTON2) = IDYES then
+      FControle
+        .Entidades
+        .Pedidos
+          .This
+            .Id(dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger)
+          .&End
+        .Excluir;
+   end
+   else
+   begin
+      if Application.MessageBox('Deseja excluir este Produto?', 'EXCLUSÃO',
+                                MB_YESNO + MB_DEFBUTTON2) = IDYES then
+      FControle
+        .Entidades
+        .PedidosItens
+          .This
+            .Id(dsItens.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger)
+          .&End
+        .Excluir;
+   end;
+   ListarTodos;
+end;
+
+procedure TfrmPedidos.btnNewClick(Sender: TObject);
+begin
+  inherited;
+
+   if (pcMain.ActivePageIndex = 1) and
+      (pcData.ActivePageIndex = 1) then
+   begin
+      //ListarItens;
+      dsItens.DataSet.Insert;
+      edtProduct.SetFocus;
+   end
+   else
+   begin
+      if pcMain.ActivePageIndex = 0 then
+         pcMain.ActivePageIndex := 1;
+      dsSearch.DataSet.Insert;
+      dsSearch.DataSet.FieldByName('DATA_EMISSAO').AsDateTime := Now;
+      edtCustomer.SetFocus;
+   end;
+end;
+
+procedure TfrmPedidos.btnSaveClick(Sender: TObject);
+
+   procedure AtualizaPedido;
+   begin
+      FControle
+        .Entidades
+        .Pedidos
+          .This
+            .Id(dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger)
+            .Pessoa(dsSearch.DataSet.FieldByName('CODIGO_CLIENTE').AsInteger)
+            .Data(dsSearch.DataSet.FieldByName('DATA_EMISSAO').AsDateTime)
+          .&End
+        .Atualizar;
+   end;
+
+var
+   vPedido: Integer;
+begin
+  inherited;
+
+   if dsSearch.DataSet.FieldByName('CODIGO_CLIENTE').AsString.Trim.IsEmpty then
+   begin
+      MessageDlg('Informe o Cliente!', mtWarning, [mbOK], 0);
+      edtCustomer.SetFocus;
+      Exit;
+   end;
+
+   if pcData.ActivePageIndex = 0 then
+   begin
+      if dsSearch.State = dsInsert then
+      begin
+         FControle
+           .Entidades
+           .Pedidos
+             .This
+               .Id(dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger)
+               .Pessoa(dsSearch.DataSet.FieldByName('CODIGO_CLIENTE').AsInteger)
+               .Data(dsSearch.DataSet.FieldByName('DATA_EMISSAO').AsDateTime)
+             .&End
+           .Inserir;
+         ListarTodos;
+         dsSearch.DataSet.Last;
+         ListarItens;
+      end
+      else
+      begin
+         vPedido := dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger;
+         AtualizaPedido;
+         ListarTodos;
+         dsSearch.DataSet.Locate('NUMERO_PEDIDO', VarArrayOf([vPedido]), []);
+         ListarItens;
+      end;
+   end
+   else
+   begin
+      vPedido := dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger;
+      if dsItens.State = dsInsert then
+      begin
+         FControle
+           .Entidades
+           .PedidosItens
+             .This
+               .Produto(dsItens.DataSet.FieldByName('CODIGO_PRODUTO').AsInteger)
+               .IdPedido(dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger)
+               .Quantidade(dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+               .Valor(dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat)
+               .ValorTotal(dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat *
+                           dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+             .&End
+           .Inserir;
+      end
+      else
+      begin
+         FControle
+           .Entidades
+           .PedidosItens
+             .This
+               .Id(dsItens.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger)
+               .Produto(dsItens.DataSet.FieldByName('CODIGO_PRODUTO').AsInteger)
+               .Quantidade(dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+               .Valor(dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat)
+               .ValorTotal(dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat *
+                           dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+             .&End
+           .Atualizar;
+      end;
+      ListarTodos;
+      dsSearch.DataSet.Locate('NUMERO_PEDIDO', VarArrayOf([vPedido]), []);
+      ListarItens;
+   end;
+end;
+
+procedure TfrmPedidos.btnSearchClick(Sender: TObject);
+begin
+  inherited;
+
+   ListarTodos;
+end;
+
+procedure TfrmPedidos.dbgProductKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if Key = VK_DELETE then
+      btnDeleteClick(Self);
+
+   if Key = VK_RETURN then
+      dsItens.DataSet.Edit;
+end;
+
+procedure TfrmPedidos.dsItensDataChange(Sender: TObject; Field: TField);
+begin
+  inherited;
+
+   if pcData.ActivePageIndex = 1 then
+   begin
+      btnSave.Enabled   := (dsItens.State in dsEditModes) or (dsSearch.State in dsEditModes);
+      btnCancel.Enabled := (dsItens.State in dsEditModes) or (dsSearch.State in dsEditModes);
+      btnNew.Enabled    := (dsItens.State = dsBrowse) or (dsSearch.State = dsBrowse);
+      btnDelete.Enabled := (dsItens.State = dsBrowse) or (dsSearch.State = dsBrowse);
+   end;
+end;
+
+procedure TfrmPedidos.dsSearchDataChange(Sender: TObject; Field: TField);
+begin
+  inherited;
+
+   ListarItens;
+end;
+
+procedure TfrmPedidos.edtDateExit(Sender: TObject);
+begin
+  inherited;
+
+   btnSave.SetFocus;
+end;
+
+procedure TfrmPedidos.edtPriceExit(Sender: TObject);
+begin
+  inherited;
+
+   btnSave.SetFocus;
+end;
+
+procedure TfrmPedidos.edtProductExit(Sender: TObject);
+begin
+   if ActiveControl = btnCancel then
+      Exit;
+
+   FControle
+     .Entidades
+     .Produto
+       .This
+         .Id(dsItens.DataSet.FieldByName('CODIGO_PRODUTO').AsInteger)
+       .&End
+     .Listar
+     .DataSet(dsProdutos);
+
+   if dsProdutos.DataSet.IsEmpty then
+   begin
+      ShowMessage('Produto não encontrado!');
+      edtProduct.SetFocus;
+   end
+   else if dsItens.DataSet.State = dsInsert then
+     dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat := dsProdutos.DataSet.FieldByName('PRECO_VENDA').AsFloat;
+end;
+
+procedure TfrmPedidos.FormCreate(Sender: TObject);
+begin
+  inherited;
+
+   FControle := TControle.New;
+   ListarTodos;
+end;
+
+procedure TfrmPedidos.ListarItens;
+begin
+   FControle
+     .Entidades
+     .PedidosItens
+       .This
+         .IdPedido(dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger)
+       .&End
+     .Listar
+     .DataSet(dsItens);
+end;
+
+procedure TfrmPedidos.ListarTodos;
+begin
+   FControle
+     .Entidades
+     .Pedidos
+     .Listar
+     .DataSet(dsSearch);
+end;
+
+end.

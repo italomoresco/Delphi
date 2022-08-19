@@ -106,6 +106,20 @@
             <Form>frmPedidos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Conexao\Conexao.Firedac.pas"/>
+        <DCCReference Include="Conexao\Conexao.Interfaces.pas"/>
+        <DCCReference Include="Model\Dao\Model.Dao.Interfaces.pas"/>
+        <DCCReference Include="Model\Dao\Model.Dao.Pedidos.pas"/>
+        <DCCReference Include="Model\Dao\Model.Dao.PedidosItens.pas"/>
+        <DCCReference Include="Model\Entidades\Model.Entidades.Pedidos.pas"/>
+        <DCCReference Include="Model\Entidades\Model.Entidades.PedidosItens.pas"/>
+        <DCCReference Include="Controller\Controller.Controle.pas"/>
+        <DCCReference Include="Controller\Controller.Entidades.pas"/>
+        <DCCReference Include="Controller\Controller.Interfaces.pas"/>
+        <DCCReference Include="Model\Dao\Model.Dao.Pessoa.pas"/>
+        <DCCReference Include="Model\Entidades\Model.Entidades.Pessoa.pas"/>
+        <DCCReference Include="Model\Entidades\Model.Entidades.Produto.pas"/>
+        <DCCReference Include="Model\Dao\Model.Dao.Produto.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

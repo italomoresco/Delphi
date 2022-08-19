@@ -1,0 +1,22 @@
+program ProjetoPedido;
+
+uses
+  Vcl.Forms,
+  view.padrao in 'View\Padrao\view.padrao.pas' {frmPadrao},
+  view.pedido in 'View\view.pedido.pas' {frmPedidos},
+  Conexao.Firedac in 'Conexao\Conexao.Firedac.pas',
+  Conexao.Interfaces in 'Conexao\Conexao.Interfaces.pas',
+  Model.Dao.Interfaces in 'Model\Dao\Model.Dao.Interfaces.pas',
+  Model.Dao.Pedidos in 'Model\Dao\Model.Dao.Pedidos.pas',
+  Model.Dao.PedidosItens in 'Model\Dao\Model.Dao.PedidosItens.pas',
+  Model.Entidades.Pedidos in 'Model\Entidades\Model.Entidades.Pedidos.pas',
+  Model.Entidades.PedidosItens in 'Model\Entidades\Model.Entidades.PedidosItens.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPedidos, frmPedidos);
+  Application.Run;
+end.

@@ -1,31 +1,51 @@
 inherited frmPedidos: TfrmPedidos
   Caption = 'Pedidos de Venda'
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited pnlMain: TPanel
+    inherited pnlButtons: TPanel
+      inherited btnNew: TButton
+        OnClick = btnNewClick
+      end
+      inherited btnSave: TButton
+        OnClick = btnSaveClick
+      end
+      inherited btnCancel: TButton
+        OnClick = btnCancelClick
+      end
+      inherited btnDelete: TButton
+        OnClick = btnDeleteClick
+      end
+    end
     inherited pcMain: TPageControl
       ActivePage = TabSheet2
       inherited TabSheet1: TTabSheet
+        inherited pnlSearch: TPanel
+          inherited btnSearch: TButton
+            OnClick = btnSearchClick
+          end
+        end
         inherited dbgSearch: TDBGrid
           Color = clBtnFace
           Columns = <
             item
               Expanded = False
-              FieldName = 'ID_PEDIDO'
+              FieldName = 'NUMERO_PEDIDO'
               Title.Caption = 'N'#250'mero Pedido'
               Width = 80
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'ID_PESSOA'
+              FieldName = 'CODIGO_CLIENTE'
               Title.Caption = 'C'#243'digo Cliente'
               Width = 80
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'DATA'
+              FieldName = 'DATA_EMISSAO'
               Title.Caption = 'Data Emiss'#227'o'
               Width = 80
               Visible = True
@@ -76,9 +96,8 @@ inherited frmPedidos: TfrmPedidos
               Top = 3
               Width = 121
               Height = 21
-              DataField = 'ID_PEDIDO'
+              DataField = 'NUMERO_PEDIDO'
               DataSource = dsSearch
-              ReadOnly = True
               TabOrder = 0
             end
             object edtCustomer: TDBEdit
@@ -86,7 +105,7 @@ inherited frmPedidos: TfrmPedidos
               Top = 30
               Width = 121
               Height = 21
-              DataField = 'ID_PESSOA'
+              DataField = 'CODIGO_CLIENTE'
               DataSource = dsSearch
               TabOrder = 1
             end
@@ -95,9 +114,10 @@ inherited frmPedidos: TfrmPedidos
               Top = 57
               Width = 121
               Height = 21
-              DataField = 'DATA'
+              DataField = 'DATA_EMISSAO'
               DataSource = dsSearch
               TabOrder = 2
+              OnExit = edtDateExit
             end
             object pnlAmount: TPanel
               Left = 280
@@ -131,6 +151,24 @@ inherited frmPedidos: TfrmPedidos
                 TabOrder = 0
               end
             end
+            object DBComboBox1: TDBComboBox
+              Left = 202
+              Top = 30
+              Width = 145
+              Height = 21
+              DataField = 'CODIGO_CLIENTE'
+              DataSource = dsSearch
+              TabOrder = 4
+            end
+            object DBLookupComboBox1: TDBLookupComboBox
+              Left = 353
+              Top = 30
+              Width = 145
+              Height = 21
+              DataField = 'CODIGO_CLIENTE'
+              DataSource = dsSearch
+              TabOrder = 5
+            end
           end
           object tsProducts: TTabSheet
             Caption = 'Produtos'
@@ -141,6 +179,7 @@ inherited frmPedidos: TfrmPedidos
               Width = 520
               Height = 211
               Align = alClient
+              DataSource = dsItens
               Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
               ReadOnly = True
               TabOrder = 0
@@ -149,18 +188,26 @@ inherited frmPedidos: TfrmPedidos
               TitleFont.Height = -11
               TitleFont.Name = 'Tahoma'
               TitleFont.Style = []
+              OnKeyDown = dbgProductKeyDown
               Columns = <
                 item
                   Expanded = False
-                  FieldName = 'PRODUTO'
+                  FieldName = 'CODIGO_PRODUTO'
                   Title.Caption = 'C'#243'digo Produto'
                   Width = 80
                   Visible = True
                 end
                 item
+                  Expanded = False
+                  FieldName = 'DESCRICAO'
+                  Title.Caption = 'Descri'#231#227'o'
+                  Width = 150
+                  Visible = True
+                end
+                item
                   Alignment = taRightJustify
                   Expanded = False
-                  FieldName = 'VALOR'
+                  FieldName = 'VALOR_UNITARIO'
                   Title.Alignment = taRightJustify
                   Title.Caption = 'Valor Unit'#225'rio'
                   Width = 80
@@ -193,7 +240,6 @@ inherited frmPedidos: TfrmPedidos
               Align = alTop
               BevelKind = bkFlat
               TabOrder = 1
-              ExplicitTop = 8
               object lblProduct: TLabel
                 Left = 8
                 Top = 10
@@ -220,8 +266,10 @@ inherited frmPedidos: TfrmPedidos
                 Top = 5
                 Width = 121
                 Height = 21
-                DataField = 'PRODUTO'
+                DataField = 'CODIGO_PRODUTO'
+                DataSource = dsItens
                 TabOrder = 0
+                OnExit = edtProductExit
               end
               object edtQuantity: TDBEdit
                 Left = 241
@@ -229,6 +277,7 @@ inherited frmPedidos: TfrmPedidos
                 Width = 109
                 Height = 21
                 DataField = 'QUANTIDADE'
+                DataSource = dsItens
                 TabOrder = 1
               end
               object edtPrice: TDBEdit
@@ -236,13 +285,24 @@ inherited frmPedidos: TfrmPedidos
                 Top = 5
                 Width = 121
                 Height = 21
-                DataField = 'VALOR'
+                DataField = 'VALOR_UNITARIO'
+                DataSource = dsItens
                 TabOrder = 2
+                OnExit = edtPriceExit
               end
             end
           end
         end
       end
     end
+  end
+  object dsItens: TDataSource
+    OnDataChange = dsItensDataChange
+    Left = 485
+    Top = 66
+  end
+  object dsProdutos: TDataSource
+    Left = 417
+    Top = 66
   end
 end
