@@ -1,0 +1,335 @@
+inherited frmPedidos: TfrmPedidos
+  Caption = 'Pedidos de Venda'
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlMain: TPanel
+    inherited pnlButtons: TPanel
+      inherited btnNew: TButton
+        OnClick = btnNewClick
+      end
+      inherited btnSave: TButton
+        OnClick = btnSaveClick
+      end
+      inherited btnCancel: TButton
+        OnClick = btnCancelClick
+      end
+      inherited btnDelete: TButton
+        OnClick = btnDeleteClick
+      end
+    end
+    inherited pcMain: TPageControl
+      Height = 271
+      Align = alTop
+      ExplicitTop = 40
+      ExplicitHeight = 271
+      inherited TabSheet1: TTabSheet
+        ExplicitHeight = 243
+        inherited pnlSearch: TPanel
+          inherited btnSearch: TButton
+            Align = alTop
+            OnClick = btnSearchClick
+          end
+        end
+        inherited dbgSearch: TDBGrid
+          Top = 43
+          Height = 200
+          Color = clBtnFace
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'NUMERO_PEDIDO'
+              Title.Caption = 'Nro. Pedido'
+              Width = 65
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CODIGO_CLIENTE'
+              Title.Caption = 'Cod. Cliente'
+              Width = 65
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOME'
+              Title.Caption = 'Cliente'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_EMISSAO'
+              Title.Caption = 'Data Emiss'#227'o'
+              Width = 75
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VALOR_TOTAL'
+              Title.Caption = 'Valor Total'
+              Width = 80
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CIDADE'
+              Title.Caption = 'Cidade'
+              Width = 70
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'UF'
+              Width = 20
+              Visible = True
+            end>
+        end
+      end
+      inherited TabSheet2: TTabSheet
+        ExplicitHeight = 243
+        object pcData: TPageControl
+          Left = 0
+          Top = 0
+          Width = 528
+          Height = 243
+          ActivePage = tsGeneral
+          Align = alClient
+          TabOrder = 0
+          object tsGeneral: TTabSheet
+            Caption = 'Dados Gerais'
+            object lblOrderNumber: TLabel
+              Left = 12
+              Top = 7
+              Width = 56
+              Height = 13
+              Caption = 'Nro. Pedido'
+            end
+            object lblCustomer: TLabel
+              Left = 33
+              Top = 33
+              Width = 33
+              Height = 13
+              Caption = 'Cliente'
+            end
+            object lblDate: TLabel
+              Left = 2
+              Top = 61
+              Width = 64
+              Height = 13
+              Caption = 'Data Emiss'#227'o'
+            end
+            object edtOrderNumber: TDBEdit
+              Left = 75
+              Top = 3
+              Width = 121
+              Height = 21
+              DataField = 'NUMERO_PEDIDO'
+              DataSource = dsSearch
+              ReadOnly = True
+              TabOrder = 0
+            end
+            object edtCustomer: TDBEdit
+              Left = 75
+              Top = 30
+              Width = 121
+              Height = 21
+              DataField = 'CODIGO_CLIENTE'
+              DataSource = dsSearch
+              TabOrder = 1
+              OnExit = edtCustomerExit
+            end
+            object edtDate: TDBEdit
+              Left = 75
+              Top = 57
+              Width = 121
+              Height = 21
+              DataField = 'DATA_EMISSAO'
+              DataSource = dsSearch
+              TabOrder = 2
+              OnExit = edtDateExit
+            end
+          end
+          object tsProducts: TTabSheet
+            Caption = 'Produtos'
+            ImageIndex = 1
+            object dbgProduct: TDBGrid
+              Left = 0
+              Top = 35
+              Width = 520
+              Height = 180
+              Align = alClient
+              DataSource = dsItens
+              Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+              ReadOnly = True
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              OnKeyDown = dbgProductKeyDown
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'CODIGO_PRODUTO'
+                  Title.Caption = 'C'#243'digo Produto'
+                  Width = 80
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'DESCRICAO'
+                  Title.Caption = 'Descri'#231#227'o'
+                  Width = 150
+                  Visible = True
+                end
+                item
+                  Alignment = taRightJustify
+                  Expanded = False
+                  FieldName = 'VALOR_UNITARIO'
+                  Title.Alignment = taRightJustify
+                  Title.Caption = 'Valor Unit'#225'rio'
+                  Width = 80
+                  Visible = True
+                end
+                item
+                  Alignment = taRightJustify
+                  Expanded = False
+                  FieldName = 'QUANTIDADE'
+                  Title.Alignment = taRightJustify
+                  Title.Caption = 'Quantidade'
+                  Width = 80
+                  Visible = True
+                end
+                item
+                  Alignment = taRightJustify
+                  Expanded = False
+                  FieldName = 'VALOR_TOTAL'
+                  Title.Alignment = taRightJustify
+                  Title.Caption = 'Valor Total'
+                  Width = 80
+                  Visible = True
+                end>
+            end
+            object pnlProduct: TPanel
+              Left = 0
+              Top = 0
+              Width = 520
+              Height = 35
+              Align = alTop
+              BevelKind = bkFlat
+              TabOrder = 1
+              object lblProduct: TLabel
+                Left = 8
+                Top = 10
+                Width = 38
+                Height = 13
+                Caption = 'Produto'
+              end
+              object lblQuantity: TLabel
+                Left = 179
+                Top = 10
+                Width = 56
+                Height = 13
+                Caption = 'Quantidade'
+              end
+              object lblPrice: TLabel
+                Left = 356
+                Top = 10
+                Width = 24
+                Height = 13
+                Caption = 'Valor'
+              end
+              object edtProduct: TDBEdit
+                Left = 52
+                Top = 5
+                Width = 121
+                Height = 21
+                DataField = 'CODIGO_PRODUTO'
+                DataSource = dsItens
+                TabOrder = 0
+                OnExit = edtProductExit
+              end
+              object edtQuantity: TDBEdit
+                Left = 241
+                Top = 5
+                Width = 109
+                Height = 21
+                DataField = 'QUANTIDADE'
+                DataSource = dsItens
+                TabOrder = 1
+              end
+              object edtPrice: TDBEdit
+                Left = 386
+                Top = 5
+                Width = 121
+                Height = 21
+                DataField = 'VALOR_UNITARIO'
+                DataSource = dsItens
+                TabOrder = 2
+                OnExit = edtPriceExit
+              end
+            end
+          end
+        end
+      end
+    end
+    object pnlValueAmount: TPanel
+      Left = 1
+      Top = 309
+      Width = 536
+      Height = 35
+      Align = alBottom
+      TabOrder = 2
+      object pnlAmount: TPanel
+        Left = 335
+        Top = 1
+        Width = 200
+        Height = 33
+        Align = alRight
+        Color = 5592575
+        ParentBackground = False
+        TabOrder = 0
+        object lblAmount: TLabel
+          Left = 16
+          Top = 12
+          Width = 51
+          Height = 13
+          Caption = 'Valor Total'
+        end
+        object edtAmount: TDBEdit
+          Left = 73
+          Top = 4
+          Width = 121
+          Height = 26
+          BiDiMode = bdRightToLeft
+          DataField = 'VALOR_TOTAL'
+          DataSource = dsSearch
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentBiDiMode = False
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+    end
+  end
+  object dsItens: TDataSource
+    OnDataChange = dsItensDataChange
+    Left = 485
+    Top = 66
+  end
+  object dsProdutos: TDataSource
+    Left = 217
+    Top = 218
+  end
+  object dsClientes: TDataSource
+    Left = 157
+    Top = 218
+  end
+end

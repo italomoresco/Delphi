@@ -49,6 +49,7 @@ type
       Shift: TShiftState);
     procedure edtCustomerExit(Sender: TObject);
     procedure dsItensDataChange(Sender: TObject; Field: TField);
+    procedure pcMainChange(Sender: TObject);
   private
     { Private declarations }
     FControle: iControle;
@@ -105,6 +106,8 @@ begin
            .Excluir;
    end;
    ListarTodos;
+
+   pcMain.ActivePageIndex := 0;
 end;
 
 procedure TfrmPedidos.btnNewClick(Sender: TObject);
@@ -247,7 +250,7 @@ begin
       btnSave.Enabled   := dsItens.State in dsEditModes;
       btnCancel.Enabled := dsItens.State in dsEditModes;
       btnNew.Enabled    := dsItens.State = dsBrowse;
-      btnDelete.Enabled := dsItens.State = dsBrowse;
+      btnDelete.Enabled := (dsItens.State = dsBrowse) and (not dsItens.DataSet.IsEmpty);
    end;
 end;
 
@@ -315,7 +318,7 @@ begin
       ShowMessage('Produto não encontrado!');
       edtProduct.SetFocus;
    end
-   else if dsItens.DataSet.State = dsInsert then
+   else if dsItens.DataSet.State in dsEditModes then
       dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat := dsProdutos.DataSet.FieldByName('PRECO_VENDA').AsFloat;
 end;
 
@@ -349,6 +352,13 @@ begin
 
    if FNumeroPedido > 0 then
       dsSearch.DataSet.Locate('NUMERO_PEDIDO', VarArrayOf([FNumeroPedido]), []);
+end;
+
+procedure TfrmPedidos.pcMainChange(Sender: TObject);
+begin
+  inherited;
+
+   pcData.ActivePageIndex := 0;
 end;
 
 end.

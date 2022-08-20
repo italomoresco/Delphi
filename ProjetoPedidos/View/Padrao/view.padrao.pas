@@ -45,7 +45,7 @@ begin
    btnSave.Enabled    := dsSearch.State in dsEditModes;
    btnCancel.Enabled  := dsSearch.State in dsEditModes;
    btnNew.Enabled     := dsSearch.State = dsBrowse;
-   btnDelete.Enabled  := dsSearch.State = dsBrowse;
+   btnDelete.Enabled  := (dsSearch.State = dsBrowse) and (not dsSearch.DataSet.IsEmpty);
 end;
 
 procedure TfrmPadrao.dbgSearchDblClick(Sender: TObject);
@@ -70,6 +70,7 @@ end;
 procedure TfrmPadrao.pcMainChange(Sender: TObject);
 begin
    ButtonsControl;
+
 end;
 
 end.

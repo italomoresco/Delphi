@@ -17,13 +17,16 @@ uses
   Model.Dao.Pessoa in 'Model\Dao\Model.Dao.Pessoa.pas',
   Model.Entidades.Pessoa in 'Model\Entidades\Model.Entidades.Pessoa.pas',
   Model.Entidades.Produto in 'Model\Entidades\Model.Entidades.Produto.pas',
-  Model.Dao.Produto in 'Model\Dao\Model.Dao.Produto.pas';
+  Model.Dao.Produto in 'Model\Dao\Model.Dao.Produto.pas',
+  Vcl.Themes,
+  Vcl.Styles;
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Glossy');
   Application.CreateForm(TfrmPedidos, frmPedidos);
   Application.Run;
 end.
