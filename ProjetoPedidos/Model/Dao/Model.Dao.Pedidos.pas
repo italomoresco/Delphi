@@ -102,11 +102,11 @@ begin
    Result := Self;
    try
       FConexao
-        .SQL('INSERT INTO PEDIDOS (NUMERO_PEDIDO, CODIGO_CLIENTE, DATA_EMISSAO) '+
-             'VALUES (:ID, :PESSOA, :DATA)')
-        .Params('ID', FPedidos.Id)
+        .SQL('INSERT INTO PEDIDOS (CODIGO_CLIENTE, DATA_EMISSAO, VALOR_TOTAL) '+
+             'VALUES (:PESSOA, :DATA, :VALOR_TOTAL)')
         .Params('PESSOA', FPedidos.Pessoa)
         .Params('DATA', FPedidos.Data)
+        .Params('VALOR_TOTAL', FPedidos.ValorTotal)
         .ExecSQL;
       MessageDlg('Pedido Salvo!', mtInformation, [mbOK], 0);
    except on e:Exception do
@@ -119,9 +119,7 @@ begin
    Result := Self;
    FDataSet :=
       FConexao
-         .SQL('SELECT * FROM PEDIDOS')
-         //.SQL('SELECT * FROM PEDIDOS WHERE TIPO = :TIPO ')
-         //.Params('TIPO', FPedidos.Tipo)
+         .SQL('SELECT * FROM PEDIDOS LEFT JOIN CLIENTES ON CODIGO_CLIENTE = CODIGO')
          .Open
          .DataSet;
 end;

@@ -20,17 +20,17 @@
     <Transaction>2022/08/17 20:04:18.000.740,C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Unit1.dfm=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\View\view.pedido.dfm</Transaction>
     <Transaction>2022/08/18 19:26:29.000.947,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Conexao\Conexao.Firedac.pas</Transaction>
     <Transaction>2022/08/18 19:26:30.000.052,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Conexao\Conexao.Interfaces.pas</Transaction>
-    <Transaction>2022/08/18 22:28:51.453,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.Interfaces.pas</Transaction>
-    <Transaction>2022/08/18 22:28:51.491,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.Pedidos.pas</Transaction>
-    <Transaction>2022/08/18 22:28:51.528,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.PedidosItens.pas</Transaction>
-    <Transaction>2022/08/18 22:29:55.561,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Entidades\Model.Entidades.Pedidos.pas</Transaction>
-    <Transaction>2022/08/18 22:29:55.594,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Entidades\Model.Entidades.PedidosItens.pas</Transaction>
-    <Transaction>2022/08/18 22:42:58.256,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Controller\Controller.Controle.pas</Transaction>
-    <Transaction>2022/08/18 22:43:14.282,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Controller\Controller.Entidades.pas</Transaction>
-    <Transaction>2022/08/18 22:44:46.563,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Controller\Controller.Interfaces.pas</Transaction>
-    <Transaction>2022/08/18 23:36:50.899,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.Pessoa.pas</Transaction>
-    <Transaction>2022/08/18 23:37:00.048,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Entidades\Model.Entidades.Pessoa.pas</Transaction>
-    <Transaction>2022/08/18 23:44:11.111,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Entidades\Model.Entidades.Produto.pas</Transaction>
-    <Transaction>2022/08/18 23:44:17.153,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.Produto.pas</Transaction>
+    <Transaction>2022/08/18 22:28:51.000.453,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.Interfaces.pas</Transaction>
+    <Transaction>2022/08/18 22:28:51.000.528,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.PedidosItens.pas</Transaction>
+    <Transaction>2022/08/18 22:28:51.000.491,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.Pedidos.pas</Transaction>
+    <Transaction>2022/08/18 22:29:55.000.561,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Entidades\Model.Entidades.Pedidos.pas</Transaction>
+    <Transaction>2022/08/18 22:29:55.000.594,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Entidades\Model.Entidades.PedidosItens.pas</Transaction>
+    <Transaction>2022/08/18 22:42:58.000.256,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Controller\Controller.Controle.pas</Transaction>
+    <Transaction>2022/08/18 22:43:14.000.282,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Controller\Controller.Entidades.pas</Transaction>
+    <Transaction>2022/08/18 22:44:46.000.563,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Controller\Controller.Interfaces.pas</Transaction>
+    <Transaction>2022/08/18 23:36:50.000.899,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.Pessoa.pas</Transaction>
+    <Transaction>2022/08/18 23:37:00.000.048,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Entidades\Model.Entidades.Pessoa.pas</Transaction>
+    <Transaction>2022/08/18 23:44:11.000.111,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Entidades\Model.Entidades.Produto.pas</Transaction>
+    <Transaction>2022/08/18 23:44:17.000.153,=C:\Users\italo\Documents\GitHub\Delphi\ProjetoPedidos\Model\Dao\Model.Dao.Produto.pas</Transaction>
   </Transactions>
 </BorlandProject>

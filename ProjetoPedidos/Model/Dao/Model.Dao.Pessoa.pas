@@ -133,7 +133,8 @@ begin
       FConexao
          .SQL('SELECT * FROM CLIENTES WHERE CODIGO = :ID')
          .Params('ID', FPessoa.Id)
-         .Open.DataSet;
+         .Open
+         .DataSet;
 end;
 
 class function TDAOPessoa.New: iDAOEntity<TPessoa>;

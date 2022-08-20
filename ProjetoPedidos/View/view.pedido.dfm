@@ -5,6 +5,7 @@ inherited frmPedidos: TfrmPedidos
   TextHeight = 13
   inherited pnlMain: TPanel
     inherited pnlButtons: TPanel
+      ExplicitTop = -5
       inherited btnNew: TButton
         OnClick = btnNewClick
       end
@@ -19,35 +20,48 @@ inherited frmPedidos: TfrmPedidos
       end
     end
     inherited pcMain: TPageControl
-      ActivePage = TabSheet2
+      Height = 271
+      Align = alTop
+      ExplicitHeight = 271
       inherited TabSheet1: TTabSheet
+        ExplicitHeight = 243
         inherited pnlSearch: TPanel
           inherited btnSearch: TButton
+            Align = alTop
             OnClick = btnSearchClick
           end
         end
         inherited dbgSearch: TDBGrid
+          Top = 43
+          Height = 200
           Color = clBtnFace
           Columns = <
             item
               Expanded = False
               FieldName = 'NUMERO_PEDIDO'
-              Title.Caption = 'N'#250'mero Pedido'
-              Width = 80
+              Title.Caption = 'Nro. Pedido'
+              Width = 65
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CODIGO_CLIENTE'
-              Title.Caption = 'C'#243'digo Cliente'
-              Width = 80
+              Title.Caption = 'Cod. Cliente'
+              Width = 65
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOME'
+              Title.Caption = 'Cliente'
+              Width = 100
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'DATA_EMISSAO'
               Title.Caption = 'Data Emiss'#227'o'
-              Width = 80
+              Width = 75
               Visible = True
             end
             item
@@ -56,15 +70,29 @@ inherited frmPedidos: TfrmPedidos
               Title.Caption = 'Valor Total'
               Width = 80
               Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CIDADE'
+              Title.Caption = 'Cidade'
+              Width = 70
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'UF'
+              Width = 20
+              Visible = True
             end>
         end
       end
       inherited TabSheet2: TTabSheet
+        ExplicitHeight = 243
         object pcData: TPageControl
           Left = 0
           Top = 0
           Width = 528
-          Height = 274
+          Height = 243
           ActivePage = tsGeneral
           Align = alClient
           TabOrder = 0
@@ -98,6 +126,7 @@ inherited frmPedidos: TfrmPedidos
               Height = 21
               DataField = 'NUMERO_PEDIDO'
               DataSource = dsSearch
+              ReadOnly = True
               TabOrder = 0
             end
             object edtCustomer: TDBEdit
@@ -108,6 +137,7 @@ inherited frmPedidos: TfrmPedidos
               DataField = 'CODIGO_CLIENTE'
               DataSource = dsSearch
               TabOrder = 1
+              OnExit = edtCustomerExit
             end
             object edtDate: TDBEdit
               Left = 75
@@ -119,56 +149,6 @@ inherited frmPedidos: TfrmPedidos
               TabOrder = 2
               OnExit = edtDateExit
             end
-            object pnlAmount: TPanel
-              Left = 280
-              Top = 200
-              Width = 236
-              Height = 41
-              Color = 5592575
-              ParentBackground = False
-              TabOrder = 3
-              object lblAmount: TLabel
-                Left = 41
-                Top = 16
-                Width = 51
-                Height = 13
-                Caption = 'Valor Total'
-              end
-              object edtAmount: TDBEdit
-                Left = 98
-                Top = 8
-                Width = 121
-                Height = 27
-                DataField = 'VALOR_TOTAL'
-                DataSource = dsSearch
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -16
-                Font.Name = 'Tahoma'
-                Font.Style = [fsBold]
-                ParentFont = False
-                ReadOnly = True
-                TabOrder = 0
-              end
-            end
-            object DBComboBox1: TDBComboBox
-              Left = 202
-              Top = 30
-              Width = 145
-              Height = 21
-              DataField = 'CODIGO_CLIENTE'
-              DataSource = dsSearch
-              TabOrder = 4
-            end
-            object DBLookupComboBox1: TDBLookupComboBox
-              Left = 353
-              Top = 30
-              Width = 145
-              Height = 21
-              DataField = 'CODIGO_CLIENTE'
-              DataSource = dsSearch
-              TabOrder = 5
-            end
           end
           object tsProducts: TTabSheet
             Caption = 'Produtos'
@@ -177,7 +157,7 @@ inherited frmPedidos: TfrmPedidos
               Left = 0
               Top = 35
               Width = 520
-              Height = 211
+              Height = 180
               Align = alClient
               DataSource = dsItens
               Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -295,6 +275,50 @@ inherited frmPedidos: TfrmPedidos
         end
       end
     end
+    object pnlValueAmount: TPanel
+      Left = 1
+      Top = 309
+      Width = 536
+      Height = 35
+      Align = alBottom
+      TabOrder = 2
+      ExplicitTop = 311
+      object pnlAmount: TPanel
+        Left = 335
+        Top = 1
+        Width = 200
+        Height = 33
+        Align = alRight
+        Color = 5592575
+        ParentBackground = False
+        TabOrder = 0
+        object lblAmount: TLabel
+          Left = 16
+          Top = 12
+          Width = 51
+          Height = 13
+          Caption = 'Valor Total'
+        end
+        object edtAmount: TDBEdit
+          Left = 73
+          Top = 4
+          Width = 121
+          Height = 26
+          BiDiMode = bdRightToLeft
+          DataField = 'VALOR_TOTAL'
+          DataSource = dsSearch
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentBiDiMode = False
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+      end
+    end
   end
   object dsItens: TDataSource
     OnDataChange = dsItensDataChange
@@ -302,7 +326,11 @@ inherited frmPedidos: TfrmPedidos
     Top = 66
   end
   object dsProdutos: TDataSource
-    Left = 417
-    Top = 66
+    Left = 217
+    Top = 218
+  end
+  object dsClientes: TDataSource
+    Left = 157
+    Top = 218
   end
 end

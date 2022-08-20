@@ -20,9 +20,6 @@ type
     edtOrderNumber: TDBEdit;
     edtCustomer: TDBEdit;
     edtDate: TDBEdit;
-    pnlAmount: TPanel;
-    lblAmount: TLabel;
-    edtAmount: TDBEdit;
     dbgProduct: TDBGrid;
     pnlProduct: TPanel;
     lblProduct: TLabel;
@@ -31,26 +28,31 @@ type
     edtProduct: TDBEdit;
     edtQuantity: TDBEdit;
     edtPrice: TDBEdit;
-    DBComboBox1: TDBComboBox;
-    DBLookupComboBox1: TDBLookupComboBox;
     dsItens: TDataSource;
     dsProdutos: TDataSource;
+    pnlValueAmount: TPanel;
+    pnlAmount: TPanel;
+    lblAmount: TLabel;
+    edtAmount: TDBEdit;
+    dsClientes: TDataSource;
     procedure btnSearchClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure btnNewClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
-    procedure dsItensDataChange(Sender: TObject; Field: TField);
     procedure dsSearchDataChange(Sender: TObject; Field: TField);
     procedure edtPriceExit(Sender: TObject);
     procedure edtDateExit(Sender: TObject);
     procedure edtProductExit(Sender: TObject);
     procedure dbgProductKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure edtCustomerExit(Sender: TObject);
+    procedure dsItensDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
     FControle: iControle;
+    FNumeroPedido: Integer;
     procedure ListarTodos;
     procedure ListarItens;
   public
@@ -75,6 +77,8 @@ end;
 procedure TfrmPedidos.btnDeleteClick(Sender: TObject);
 begin
   inherited;
+
+   FNumeroPedido := dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger;
 
    if pcData.ActivePageIndex = 0 then
    begin
@@ -139,8 +143,6 @@ procedure TfrmPedidos.btnSaveClick(Sender: TObject);
         .Atualizar;
    end;
 
-var
-   vPedido: Integer;
 begin
   inherited;
 
@@ -170,16 +172,22 @@ begin
       end
       else
       begin
-         vPedido := dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger;
+         FNumeroPedido := dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger;
          AtualizaPedido;
          ListarTodos;
-         dsSearch.DataSet.Locate('NUMERO_PEDIDO', VarArrayOf([vPedido]), []);
          ListarItens;
       end;
    end
    else
    begin
-      vPedido := dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger;
+      if (dsItens.DataSet.FieldByName('QUANTIDADE').AsFloat < 1) or
+         (dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat < 1) then
+      begin
+         MessageDlg('Informe os Valores!', mtWarning, [mbOK], 0);
+         Exit;
+      end;
+
+      FNumeroPedido := dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger;
       if dsItens.State = dsInsert then
       begin
          FControle
@@ -190,8 +198,8 @@ begin
                .IdPedido(dsSearch.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger)
                .Quantidade(dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
                .Valor(dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat)
-               .ValorTotal(dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat *
-                           dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+               .ValorTotal(FormatFloat('0.00', dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat *
+                                               dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger).ToDouble)
              .&End
            .Inserir;
       end
@@ -201,17 +209,16 @@ begin
            .Entidades
            .PedidosItens
              .This
-               .Id(dsItens.DataSet.FieldByName('NUMERO_PEDIDO').AsInteger)
+               .Id(dsItens.DataSet.FieldByName('AUTO_INCREM').AsInteger)
                .Produto(dsItens.DataSet.FieldByName('CODIGO_PRODUTO').AsInteger)
                .Quantidade(dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
                .Valor(dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat)
-               .ValorTotal(dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat *
-                           dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger)
+               .ValorTotal(FormatFloat('0.00', dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat *
+                                               dsItens.DataSet.FieldByName('QUANTIDADE').AsInteger).ToDouble)
              .&End
            .Atualizar;
       end;
       ListarTodos;
-      dsSearch.DataSet.Locate('NUMERO_PEDIDO', VarArrayOf([vPedido]), []);
       ListarItens;
    end;
 end;
@@ -235,14 +242,12 @@ end;
 
 procedure TfrmPedidos.dsItensDataChange(Sender: TObject; Field: TField);
 begin
-  inherited;
-
    if pcData.ActivePageIndex = 1 then
    begin
-      btnSave.Enabled   := (dsItens.State in dsEditModes) or (dsSearch.State in dsEditModes);
-      btnCancel.Enabled := (dsItens.State in dsEditModes) or (dsSearch.State in dsEditModes);
-      btnNew.Enabled    := (dsItens.State = dsBrowse) or (dsSearch.State = dsBrowse);
-      btnDelete.Enabled := (dsItens.State = dsBrowse) or (dsSearch.State = dsBrowse);
+      btnSave.Enabled   := dsItens.State in dsEditModes;
+      btnCancel.Enabled := dsItens.State in dsEditModes;
+      btnNew.Enabled    := dsItens.State = dsBrowse;
+      btnDelete.Enabled := dsItens.State = dsBrowse;
    end;
 end;
 
@@ -253,18 +258,42 @@ begin
    ListarItens;
 end;
 
+procedure TfrmPedidos.edtCustomerExit(Sender: TObject);
+begin
+   if (ActiveControl = btnCancel) or
+      (dsSearch.DataSet.FieldByName('CODIGO_CLIENTE').AsString.IsEmpty) then
+      Exit;
+
+   FControle
+     .Entidades
+     .Pessoa
+       .This
+         .Id(dsSearch.DataSet.FieldByName('CODIGO_CLIENTE').AsInteger)
+       .&End
+     .ListarPorId(dsSearch.DataSet.FieldByName('CODIGO_CLIENTE').AsInteger)
+     .DataSet(dsClientes);
+
+   if dsClientes.DataSet.IsEmpty then
+   begin
+      ShowMessage('Cliente não encontrado!');
+      edtCustomer.SetFocus;
+   end;
+end;
+
 procedure TfrmPedidos.edtDateExit(Sender: TObject);
 begin
   inherited;
 
-   btnSave.SetFocus;
+   if dsSearch.DataSet.State in dsEditModes then
+      btnSave.SetFocus;
 end;
 
 procedure TfrmPedidos.edtPriceExit(Sender: TObject);
 begin
   inherited;
 
-   btnSave.SetFocus;
+   if dsItens.DataSet.State in dsEditModes then
+      btnSave.SetFocus;
 end;
 
 procedure TfrmPedidos.edtProductExit(Sender: TObject);
@@ -278,7 +307,7 @@ begin
        .This
          .Id(dsItens.DataSet.FieldByName('CODIGO_PRODUTO').AsInteger)
        .&End
-     .Listar
+     .ListarPorId(dsItens.DataSet.FieldByName('CODIGO_PRODUTO').AsInteger)
      .DataSet(dsProdutos);
 
    if dsProdutos.DataSet.IsEmpty then
@@ -287,7 +316,7 @@ begin
       edtProduct.SetFocus;
    end
    else if dsItens.DataSet.State = dsInsert then
-     dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat := dsProdutos.DataSet.FieldByName('PRECO_VENDA').AsFloat;
+      dsItens.DataSet.FieldByName('VALOR_UNITARIO').AsFloat := dsProdutos.DataSet.FieldByName('PRECO_VENDA').AsFloat;
 end;
 
 procedure TfrmPedidos.FormCreate(Sender: TObject);
@@ -317,6 +346,9 @@ begin
      .Pedidos
      .Listar
      .DataSet(dsSearch);
+
+   if FNumeroPedido > 0 then
+      dsSearch.DataSet.Locate('NUMERO_PEDIDO', VarArrayOf([FNumeroPedido]), []);
 end;
 
 end.
