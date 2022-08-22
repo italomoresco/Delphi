@@ -1,0 +1,18 @@
+program ProjetoCadastroPessoa;
+
+uses
+  Vcl.Forms,
+  view.padrao in 'View\Padrao\view.padrao.pas' {frmPadrao},
+  view.pessoa in 'View\view.pessoa.pas' {frmPessoa},
+  Vcl.Themes,
+  Vcl.Styles;
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  TStyleManager.TrySetStyle('Glossy');
+  Application.CreateForm(TfrmPessoa, frmPessoa);
+  Application.Run;
+end.

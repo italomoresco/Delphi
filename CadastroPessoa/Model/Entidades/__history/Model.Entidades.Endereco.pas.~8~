@@ -1,0 +1,136 @@
+unit Model.Entidades.Endereco;
+
+interface
+
+uses
+  Model.Dao.Interfaces;
+
+type
+  TEndereco = class
+  private
+    [weak]
+    FParent: iDAOEntity<TEndereco>;
+    FCEP: Integer;
+    FEndereco: string;
+    FNum: String;
+    FCidade: String;
+    FEstado: String;
+    FIdPessoa: Integer;
+    FId: Integer;
+  public
+    constructor Create(Parent: iDAOEntity<TEndereco>);
+    destructor Destroy; override;
+    function Id(Value: Integer): TEndereco; overload;
+    function Id: Integer; overload;
+    function IdPessoa(Value: Integer): TEndereco; overload;
+    function IdPessoa: Integer; overload;
+    function CEP(Value: Integer): TEndereco; overload;
+    function CEP: Integer; overload;
+    function Endereco(Value: String): TEndereco; overload;
+    function Endereco: String; overload;
+    function Num(Value: String): TEndereco; overload;
+    function Num: String; overload;
+    function Cidade(Value: String): TEndereco; overload;
+    function Cidade: String; overload;
+    function Estado(Value: String): TEndereco; overload;
+    function Estado: String; overload;
+    function &End: iDAOEntity<TEndereco>;
+  end;
+
+implementation
+
+{ TPedidos }
+
+function TEndereco.&End: iDAOEntity<TEndereco>;
+begin
+   Result := FParent;
+end;
+
+function TEndereco.NomeMae: String;
+begin
+   Result := FNomeMae;
+end;
+
+function TEndereco.NomeMae(Value: String): TEndereco;
+begin
+   Result := Self;
+   FNomeMae := Value;
+end;
+
+function TEndereco.NomePai: String;
+begin
+   Result := FNomePai;
+end;
+
+function TEndereco.NomePai(Value: String): TEndereco;
+begin
+   Result := Self;
+   FNomePai := Value;
+end;
+
+constructor TEndereco.Create(Parent: iDAOEntity<TEndereco>);
+begin
+   FParent := Parent;
+end;
+
+destructor TEndereco.Destroy;
+begin
+  inherited;
+end;
+
+function TEndereco.Id(Value: Integer): TEndereco;
+begin
+   Result := Self;
+   FId := Value;
+end;
+
+function TEndereco.Id: Integer;
+begin
+   Result := FId;
+end;
+
+function TEndereco.IdPessoa: Integer;
+begin
+   Result := FIdPessoa;
+end;
+
+function TEndereco.IdPessoa(Value: Integer): TEndereco;
+begin
+   Result := Self;
+   FIdPessoa := Value;
+end;
+
+function TEndereco.CEP: String;
+begin
+   Result := FCEP;
+end;
+
+function TEndereco.CEP(Value: String): TEndereco;
+begin
+   Result := Self;
+   FCEP := Value;
+end;
+
+function TEndereco.CPF(Value: Integer): TEndereco;
+begin
+   Result := Self;
+   FCPF := Value;
+end;
+
+function TEndereco.CPF: Integer;
+begin
+   Result := FCPF;
+end;
+
+function TEndereco.RG(Value: Integer): TEndereco;
+begin
+   Result := Self;
+   FRG := Value;
+end;
+
+function TEndereco.RG: Integer;
+begin
+   Result := FRG;
+end;
+
+end.

@@ -1,0 +1,15 @@
+program ProjetoCadastroPessoa;
+
+uses
+  Vcl.Forms,
+  view.padrao in 'View\Padrao\view.padrao.pas' {frmPadrao},
+  view.pessoa in 'View\view.pessoa.pas' {frmPessoa};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPessoa, frmPessoa);
+  Application.Run;
+end.

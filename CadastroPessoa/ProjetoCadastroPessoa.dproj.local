@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/11/22 21:00:42.000.248,=C:\Users\italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/17 19:54:16.000.336,=C:\Users\italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/21 21:20:14.147,=C:\Users\italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/21 21:23:42.263,C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\View\Unit1.dfm=C:\Users\italo\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2022/08/21 21:23:42.263,C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\View\Unit1.pas=C:\Users\italo\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/08/21 21:23:53.880,C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\ProjetoCadastroPessoa.dproj=C:\Users\italo\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2022/08/21 21:26:14.749,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\View\Padrao\view.padrao.pas</Transaction>
+    <Transaction>2022/08/21 21:26:42.474,C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\View\Unit1.pas=</Transaction>
+    <Transaction>2022/08/21 21:27:02.191,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Unit1.pas</Transaction>
+    <Transaction>2022/08/21 21:27:40.406,C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\View\view.pessoa.dfm=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Unit1.dfm</Transaction>
+    <Transaction>2022/08/21 21:27:40.406,C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\View\view.pessoa.pas=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Unit1.pas</Transaction>
+    <Transaction>2022/08/21 21:31:08.665,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Controller\Controller.Controle.pas</Transaction>
+    <Transaction>2022/08/21 21:31:08.709,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Controller\Controller.Entidades.pas</Transaction>
+    <Transaction>2022/08/21 21:31:08.727,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Controller\Controller.Interfaces.pas</Transaction>
+    <Transaction>2022/08/21 21:35:08.469,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Conexao\Conexao.Firedac.pas</Transaction>
+    <Transaction>2022/08/21 21:35:08.500,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Conexao\Conexao.Interfaces.pas</Transaction>
+    <Transaction>2022/08/21 21:35:55.435,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Model\Entidades\Model.Entidades.Pessoa.pas</Transaction>
+    <Transaction>2022/08/21 21:36:12.724,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Model\Dao\Model.Dao.Interfaces.pas</Transaction>
+    <Transaction>2022/08/21 21:36:53.485,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Model\Dao\Model.Dao.Pessoa.pas</Transaction>
+    <Transaction>2022/08/21 21:56:36.838,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Unit1.pas</Transaction>
+    <Transaction>2022/08/21 21:58:11.693,C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Model\Entidades\Model.Entidades.Endereco.pas=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Unit1.pas</Transaction>
+    <Transaction>2022/08/21 22:07:16.844,=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Unit1.pas</Transaction>
+    <Transaction>2022/08/21 22:07:46.249,C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Model\Dao\Model.Dao.Endereco.pas=C:\Users\italo\Documents\GitHub\Delphi\CadastroPessoa\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

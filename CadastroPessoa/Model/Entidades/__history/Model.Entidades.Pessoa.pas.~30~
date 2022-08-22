@@ -1,0 +1,100 @@
+unit Model.Entidades.Pessoa;
+
+interface
+
+uses
+  Model.Dao.Interfaces;
+
+type
+  TPessoa = class
+  private
+    [weak]
+    FParent: iDAOEntity<TPessoa>;
+    FNome: string;
+    FCPF: Integer;
+    FRG: Integer;
+    FNomeMae: String;
+    FNomePai: String;
+    FId: Integer;
+  public
+    constructor Create(Parent: iDAOEntity<TPessoa>);
+    destructor Destroy; override;
+    function Id(Value: Integer): TPessoa; overload;
+    function Id: Integer; overload;
+    function Nome(Value: String): TPessoa; overload;
+    function Nome: String; overload;
+    function CPF(Value: Integer): TPessoa; overload;
+    function CPF: Integer; overload;
+    function RG(Value: Integer): TPessoa; overload;
+    function RG: Integer; overload;
+    function NomeMae(Value: String): TPessoa; overload;
+    function NomeMae: String; overload;
+    function NomePai(Value: String): TPessoa; overload;
+    function NomePai: String; overload;
+    function &End: iDAOEntity<TPessoa>;
+  end;
+
+implementation
+
+{ TPedidos }
+
+function TPessoa.&End: iDAOEntity<TPessoa>;
+begin
+   Result := FParent;
+end;
+
+function TPessoa.NomeMae: String;
+begin
+   Result := FNomeMae;
+end;
+
+function TPessoa.NomeMae(Value: String): TPessoa;
+begin
+   Result := Self;
+   FNomeMae := Value;
+end;
+
+function TPessoa.Estado: String;
+begin
+   Result := FEstado;
+end;
+
+function TPessoa.Estado(Value: String): TPessoa;
+begin
+   Result := Self;
+   FEstado := Value;
+end;
+
+constructor TPessoa.Create(Parent: iDAOEntity<TPessoa>);
+begin
+   FParent := Parent;
+end;
+
+destructor TPessoa.Destroy;
+begin
+  inherited;
+end;
+
+function TPessoa.Id(Value: Integer): TPessoa;
+begin
+   Result := Self;
+   FId := Value;
+end;
+
+function TPessoa.Id: Integer;
+begin
+   Result := FId;
+end;
+
+function TPessoa.Nome: String;
+begin
+   Result := FNome;
+end;
+
+function TPessoa.Nome(Value: String): TPessoa;
+begin
+   Result := Self;
+   FNome := Value;
+end;
+
+end.
