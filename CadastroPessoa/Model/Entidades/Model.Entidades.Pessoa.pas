@@ -10,9 +10,9 @@ type
   private
     [weak]
     FParent: iDAOEntity<TPessoa>;
-    FNome: string;
-    FCPF: Integer;
-    FRG: Integer;
+    FNome: String;
+    FCPF: String;
+    FRG: String;
     FNomeMae: String;
     FNomePai: String;
     FId: Integer;
@@ -23,10 +23,10 @@ type
     function Id: Integer; overload;
     function Nome(Value: String): TPessoa; overload;
     function Nome: String; overload;
-    function CPF(Value: Integer): TPessoa; overload;
-    function CPF: Integer; overload;
-    function RG(Value: Integer): TPessoa; overload;
-    function RG: Integer; overload;
+    function CPF(Value: String): TPessoa; overload;
+    function CPF: String; overload;
+    function RG(Value: String): TPessoa; overload;
+    function RG: String; overload;
     function NomeMae(Value: String): TPessoa; overload;
     function NomeMae: String; overload;
     function NomePai(Value: String): TPessoa; overload;
@@ -97,24 +97,24 @@ begin
    FNome := Value;
 end;
 
-function TPessoa.CPF(Value: Integer): TPessoa;
+function TPessoa.CPF(Value: String): TPessoa;
 begin
    Result := Self;
    FCPF := Value;
 end;
 
-function TPessoa.CPF: Integer;
+function TPessoa.CPF: String;
 begin
    Result := FCPF;
 end;
 
-function TPessoa.RG(Value: Integer): TPessoa;
+function TPessoa.RG(Value: String): TPessoa;
 begin
    Result := Self;
    FRG := Value;
 end;
 
-function TPessoa.RG: Integer;
+function TPessoa.RG: String;
 begin
    Result := FRG;
 end;

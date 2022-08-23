@@ -4,7 +4,7 @@ interface
 
 uses
   Model.Dao.Interfaces, Model.Entidades.Endereco, Data.DB, Conexao.Interfaces,
-  Conexao.Firedac;
+  Conexao.DBGo;
 
 type
   TDAOEndereco = class(TInterfacedObject, iDAOEntity<TEndereco>)

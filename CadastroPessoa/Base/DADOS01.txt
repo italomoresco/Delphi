@@ -1,0 +1,4 @@
+''ID'',''ID_PESSOA'',''ENDERECO'',''CEP'',''NUM'',''CIDADE'',''ESTADO''
+''11'',''4'',''Estrada da Servidão | Chácara Santo Hubertus'',''04870470'',''10'',''São Paulo'',''SP''
+''12'',''3'',''Rua Carlos Chagas | Centro'',''89802217'',''12'',''Chapecó'',''SC''
+''13'',''3'',''Rua Nossa Senhora do Rosário | Nossa Senhora do Rosário'',''88110642'',''14'',''São José'',''SC''

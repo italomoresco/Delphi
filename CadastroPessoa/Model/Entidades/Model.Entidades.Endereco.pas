@@ -10,8 +10,8 @@ type
   private
     [weak]
     FParent: iDAOEntity<TEndereco>;
-    FCEP: Integer;
-    FEndereco: string;
+    FCEP: String;
+    FEndereco: String;
     FNum: String;
     FCidade: String;
     FEstado: String;
@@ -24,8 +24,8 @@ type
     function Id: Integer; overload;
     function IdPessoa(Value: Integer): TEndereco; overload;
     function IdPessoa: Integer; overload;
-    function CEP(Value: Integer): TEndereco; overload;
-    function CEP: Integer; overload;
+    function CEP(Value: String): TEndereco; overload;
+    function CEP: String; overload;
     function Endereco(Value: String): TEndereco; overload;
     function Endereco: String; overload;
     function Num(Value: String): TEndereco; overload;
@@ -100,12 +100,12 @@ begin
    FIdPessoa := Value;
 end;
 
-function TEndereco.CEP: Integer;
+function TEndereco.CEP: String;
 begin
    Result := FCEP;
 end;
 
-function TEndereco.CEP(Value: Integer): TEndereco;
+function TEndereco.CEP(Value: String): TEndereco;
 begin
    Result := Self;
    FCEP := Value;

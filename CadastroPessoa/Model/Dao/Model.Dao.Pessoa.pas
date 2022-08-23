@@ -4,7 +4,7 @@ interface
 
 uses
   Model.Dao.Interfaces, Model.Entidades.Pessoa, Data.DB, Conexao.Interfaces,
-  Conexao.Firedac, Vcl.Dialogs;
+  Conexao.DBGo, Vcl.Dialogs;
 
 type
   TDAOPessoa = class(TInterfacedObject, iDAOEntity<TPessoa>)
