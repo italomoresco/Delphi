@@ -1,0 +1,79 @@
+inherited fTarefa1: TfTarefa1
+  Caption = 'Tarefa 1'
+  ClientHeight = 323
+  ClientWidth = 567
+  FormStyle = fsMDIChild
+  Visible = True
+  ExplicitWidth = 583
+  ExplicitHeight = 362
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel
+    Left = 0
+    Top = 0
+    Width = 567
+    Height = 323
+    Align = alClient
+    TabOrder = 0
+    ExplicitLeft = 400
+    ExplicitTop = 128
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object lblColunas: TLabel
+      Left = 16
+      Top = 14
+      Width = 42
+      Height = 13
+      Caption = 'Colunas:'
+    end
+    object lblTabelas: TLabel
+      Left = 176
+      Top = 14
+      Width = 41
+      Height = 13
+      Caption = 'Tabelas:'
+    end
+    object lblCondicoes: TLabel
+      Left = 336
+      Top = 14
+      Width = 53
+      Height = 13
+      Caption = 'Condi'#231#245'es:'
+    end
+    object mmColunas: TMemo
+      Left = 16
+      Top = 32
+      Width = 140
+      Height = 185
+      Lines.Strings = (
+        'mmColunas')
+      TabOrder = 0
+    end
+    object mmTabelas: TMemo
+      Left = 176
+      Top = 32
+      Width = 140
+      Height = 185
+      Lines.Strings = (
+        'mmColunas')
+      TabOrder = 1
+    end
+    object mmCondicoes: TMemo
+      Left = 336
+      Top = 32
+      Width = 140
+      Height = 185
+      Lines.Strings = (
+        'mmColunas')
+      TabOrder = 2
+    end
+    object btnGerar: TBitBtn
+      Left = 484
+      Top = 112
+      Width = 75
+      Height = 33
+      Caption = 'Gerar SQL'
+      TabOrder = 3
+    end
+  end
+end

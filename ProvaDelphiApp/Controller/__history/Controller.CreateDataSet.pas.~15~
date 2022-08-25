@@ -1,0 +1,80 @@
+unit Controller.CreateDataSet;
+
+interface
+
+uses
+  Datasnap.DBClient, Data.DB, System.SysUtils, Vcl.Forms;
+
+type
+  TCreateDataSet = class(TInterfacedObject)
+  private
+    function ConfiguraDataSet: TCLientDataset;
+  public
+    function ConfiguraDataSource: TDatasource;
+    function PopulaDataSet: TCLientDataset;
+  end;
+
+implementation
+
+{ TCreateDataSet }
+
+function TCreateDataSet.ConfiguraDataSet: TCLientDataset;
+begin
+   ConfiguraDataSet := TClientDataSet.Create(nil);
+
+   ConfiguraDataSet.FieldDefs.Add('IDPROJETO', ftInteger);
+   ConfiguraDataSet.FieldDefs.Add('NOMEPROJETO', ftString, 20);
+   ConfiguraDataSet.FieldDefs.Add('VALOR', ftFloat);
+   ConfiguraDataSet.CreateDataSet;
+end;
+
+function TCreateDataSet.ConfiguraDataSource: TDatasource;
+begin
+   ConfiguraDataSource := TDataSource.Create(nil);
+end;
+
+function TCreateDataSet.PopulaDataSet: TCLientDataset;
+var
+   I: Integer;
+   vValor: Double;
+begin
+  inherited;
+  stbRodapePadrao.Panels[1].Text := 'Tarefa 03';
+  oCdsRegistros := TClientDataSet.Create(Self);
+  oCdsRegistros.Close;
+  oCdsRegistros.FieldDefs.Clear;
+  oCdsRegistros.FieldDefs.add('idProjeto',ftInteger);
+  oCdsRegistros.FieldDefs.add('NomeProjeto',ftString,200);
+  oCdsRegistros.FieldDefs.add('Valor',ftFloat);
+  oCdsRegistros.CreateDataSet;
+  oDts := TDataSource.Create(nil);
+  oDts.DataSet := oCdsRegistros;
+  dbgRegistros.DataSource := oDts;
+
+  fValor := 10.00;
+
+  try
+    for i := 1 to  10 do
+    begin
+      oCdsRegistros.Insert;
+      oCdsRegistros.FieldByName('idProjeto').AsInteger := i;
+      oCdsRegistros.FieldByName('NomeProjeto').AsString := 'Projeto '+IntToStr(i);
+      oCdsRegistros.FieldByName('Valor').AsFloat := fValor;
+      oCdsRegistros.Post;
+
+      fValor := fValor + 10.00;
+    end;
+  finally
+    oCdsRegistros.IndexFieldNames := 'idProjeto';
+    oCdsRegistros.Open;
+    oCdsRegistros.First;
+    dbgRegistros.Columns[0].Title.Caption := 'ID do Projeto';
+    dbgRegistros.Columns[1].Title.Caption := 'Nome do Projeto';
+    dbgRegistros.Columns[2].Title.Caption := 'Valor';
+    dbgRegistros.Columns[0].Width := 100;
+    dbgRegistros.Columns[1].Width := 200;
+    dbgRegistros.Columns[2].Width := 100;
+  end;
+end;
+
+end.

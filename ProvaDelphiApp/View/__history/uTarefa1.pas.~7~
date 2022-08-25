@@ -1,0 +1,35 @@
+unit uTarefa1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uPadrao, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons;
+
+type
+  TfTarefa1 = class(TfrmPadrao)
+    pnlMain: TPanel;
+    mmColunas: TMemo;
+    mmTabelas: TMemo;
+    mmCondicoes: TMemo;
+    btnGerar: TBitBtn;
+    lblColunas: TLabel;
+    lblTabelas: TLabel;
+    lblCondicoes: TLabel;
+    mmSQL: TMemo;
+    lblSQL: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fTarefa1: TfTarefa1;
+
+implementation
+
+{$R *.dfm}
+
+end.

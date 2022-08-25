@@ -1,0 +1,16 @@
+unit Controller.OperacoesInterface;
+
+interface
+
+uses
+  Data.DB;
+Type
+  iOperacoes = interface
+    function SetDataSet(DataSet: TDataSet): iOperacoesEmLote;
+    function CalculaTotal: Double;
+    function CalculaTotalDivisoes: Double;
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,61 @@
+unit Controller.Operacoes;
+
+interface
+
+uses
+  Data.DB, Controller.OperacoesInterface;
+
+type
+  TOperacoes = class(TInterfacedObject, iOperacoes)
+    FDataSet: TDataSet;
+    function SetDataSet(DataSet: TDataSet): iOperacoes;
+    function CalculaTotal: Double;
+    function CalculaTotalDivisoes: Double;
+  end;
+
+implementation
+
+{ TOperacoes }
+
+function TOperacoes.SetDataSet(DataSet: TDataSet): iOperacoes;
+begin
+   Result   := Self;
+   FDataSet := DataSet;
+end;
+
+function TOperacoes.CalculaTotal: Double;
+var
+   vTotal: Double;
+begin
+   vTotal := 0;
+
+   FDataSet.First;
+   while not FDataSet.Eof do
+   begin
+      vTotal := vTotal + FDataSet.FieldByName('VALOR').AsFloat;
+      FDataSet.Next;
+   end;
+
+   Result := vTotal;
+end;
+
+function TOperacoes.CalculaTotalDivisoes: Double;
+var
+   vId: Integer;
+   vTotal, vValorAtual, vValorAnterior: Double;
+begin
+   vTotal := 0;
+   FDataSet.First;
+   vId := FDataSet.FieldByName('IdProjeto').AsInteger;
+   while not FDataSet.Eof do
+   begin
+      vValorAtual := FDataSet.FieldByName('Valor').AsFloat;
+      if id <> FDataSet.FieldByName('IdProjeto').AsInteger then
+         vTotal := vTotal + (vValorAtual/vValorAnterior);
+      vValorAnterior := FDataSet.FieldByName('Valor').AsFloat;
+      vId         := FDataSet.FieldByName('IdProjeto').AsInteger;
+      FDataSet.Next;
+   end;
+   Result := vTotal;
+end;
+end.

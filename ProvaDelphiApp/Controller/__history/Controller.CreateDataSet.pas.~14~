@@ -1,0 +1,41 @@
+unit Controller.CreateDataSet;
+
+interface
+
+uses
+  Datasnap.DBClient, Data.DB, System.SysUtils, Vcl.Forms;
+
+type
+  TCreateDataSet = class(TInterfacedObject)
+  private
+    function ConfiguraDataSet: TCLientDataset;
+  public
+    function ConfiguraDataSource: TDatasource;
+    function PopulaDataSet: TCLientDataset;
+  end;
+
+implementation
+
+{ TCreateDataSet }
+
+function TCreateDataSet.ConfiguraDataSet: TCLientDataset;
+begin
+   ConfiguraDataSet := TClientDataSet.Create(nil);
+
+   ConfiguraDataSet.FieldDefs.Add('IDPROJETO', ftInteger);
+   ConfiguraDataSet.FieldDefs.Add('NOMEPROJETO', ftString, 20);
+   ConfiguraDataSet.FieldDefs.Add('VALOR', ftFloat);
+   ConfiguraDataSet.CreateDataSet;
+end;
+
+function TCreateDataSet.ConfiguraDataSource: TDatasource;
+begin
+   ConfiguraDataSource := TDataSource.Create(nil);
+end;
+
+function TCreateDataSet.PopulaDataSet: TCLientDataset;
+begin
+
+end;
+
+end.

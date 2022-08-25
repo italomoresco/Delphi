@@ -1,0 +1,19 @@
+inherited fTarefa2: TfTarefa2
+  Caption = 'Tarefa 2'
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lblIntervalo1: TLabel
+    Left = 192
+    Top = 24
+    Width = 53
+    Height = 13
+    Caption = 'Intervalo 1'
+  end
+  object lblIntervalo2: TLabel
+    Left = 192
+    Top = 112
+    Width = 53
+    Height = 13
+    Caption = 'Intervalo 2'
+  end
+end
