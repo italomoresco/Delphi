@@ -1,1 +1,0 @@
-mysqldump --add-drop-table -u root -p admin -B db > "DB.sql"
