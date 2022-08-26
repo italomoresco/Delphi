@@ -21,7 +21,6 @@ inherited frmPedidos: TfrmPedidos
     inherited pcMain: TPageControl
       Height = 271
       Align = alTop
-      ExplicitTop = 40
       ExplicitHeight = 271
       inherited TabSheet1: TTabSheet
         ExplicitHeight = 243
@@ -96,7 +95,6 @@ inherited frmPedidos: TfrmPedidos
           ActivePage = tsGeneral
           Align = alClient
           TabOrder = 0
-          ExplicitTop = -1
           object tsGeneral: TTabSheet
             Caption = 'Dados Gerais'
             object lblOrderNumber: TLabel

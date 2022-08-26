@@ -51,6 +51,8 @@ begin
    FConexao.Params.Add('Password=admin');
    FConexao.Params.Add('LockingMode=Normal');
 
+   FMySQLDriverLink.VendorLib := 'libmysql.dll';
+
    FConexao.Connected := True;
 end;
 
